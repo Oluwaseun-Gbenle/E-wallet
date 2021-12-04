@@ -1,6 +1,64 @@
-#transfer{
-    
+.transferHeader {
+  line-height: 10px;
 }
-transferHeader{
-    line-height: 17px;
+.display1,
+.display2 {
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+}
+@media screen and (max-width: 700px) {
+  .display1,
+  .display2 {
+    display: block;
+  }
+}
+
+.transferText1Box {
+  display: flex;
+  padding: 0;
+}
+.back-icon {
+  padding: 0;
+}
+.arrow-1 {
+  margin-left: -9px;
+}
+.transferText1 {
+  font-weight: 500;
+  font-size: 23px;
+  margin-top: 15px;
+  padding: 0;
+}
+.transferText2 {
+  font-weight: 400;
+}
+.currencySelection {
+  margin-right: 150px;
+}
+
+.btn {
+  border-radius: 5px;
+  background-color: #f093ff;
+  color: rgb(243, 242, 242);
+  cursor: pointer;
+  margin-left: 8px;
+  padding: 8px;
+}
+.input {
+  border: 1px solid black;
+  height: 15px;
+  width: 300px;
+}
+
+.sendCont {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  width: 80%;
+}
+.sendBtn {
+  background-color: #9a4cfd;
+  text-align: center;
+  width: 40%;
 }

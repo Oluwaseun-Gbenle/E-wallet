@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Transfer.css";
+import "./Balance.css";
 
-function Transfer() {
+function Confirmation() {
+
+    
   return (
-    <div id="transfer">
+    <div className="confirmation">
       <div className="transferHeader">
         <div className="transferText1Box">
           <div className="back-icon">
@@ -23,7 +26,7 @@ function Transfer() {
       <div className="display1">
         <div className="currencyArea">
           <div className="Balancetext">Your Balance is</div>
-          <h1 className="price">$ 349,000</h1>
+          <h1 className="price">$ 4,000</h1>
         </div>
 
         <div className="currencySelection">
@@ -35,23 +38,8 @@ function Transfer() {
           </div>
         </div>
       </div>
-      <div className="display2">
-        <div className="form2">
-          <p className="inputText1">Who would you like to send money to?</p>
-          <input className="input" placeholder="Select Contact"></input>
-        </div>
-        <div className="form2">
-          <p className="inputText2">How much would you like to send?</p>
-          <input className="input" placeholder="e.g $ 4,000"></input>
-        </div>
-      </div>
-      <div className="sendCont">
-        <div className="sendBtn">
-          <a href="/Confirmation">Send</a>
-        </div>
-      </div>
     </div>
   );
 }
 
-export default Transfer;
+export default Confirmation;
