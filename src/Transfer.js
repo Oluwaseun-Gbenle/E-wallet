@@ -3,6 +3,50 @@ import axios from "axios";
 import "./Transfer.css";
 
 function Transfer() {
+    const [data, setData] = useState(null);
+    const [details, setDetails] = useState(null);
+    const [select, setSelect] = useState("USD");
+    var [amount, setAmount] = useState(0);
+    const initialBalance=391765;
+    const [balance, setBalance] = useState(initialBalance);
+    const [sign,  setSign] = useState("$");
+   
+
+    useEffect(() => {
+        async function fetchData() {
+          await axios("https://api.exchangerate-api.com/v4/latest/USD")
+            .then((response) => {
+              setData(response.data.rates);
+            })
+            .catch((err) => console.log("Request Failed", err));
+        }
+        fetchData();
+      }, []);
+      console.log(data);
+
+    
+
+      useEffect(() => {
+        async function fetchDetails() {
+          const req = await axios("https://e-wallet.glitch.me/api/details");
+          console.log(req.data);
+          setDetails(req.data);
+          return req.data;
+        }
+        fetchDetails();
+      }, );
+      console.log(details);
+  
+      const roundOff = (value) =>
+      value >= 1000000000
+        ? (Math.floor(value / 1000000000) * 1000000000) / 1000000000 + "B"
+        : value >= 1000000
+        ? (Math.floor(value / 1000000) * 1000000) / 1000000 + "M"
+        : value >= 1000
+        ? (Math.floor(value / 1000) * 1000) / 1000 + "k"
+        : value;
+        
+
   return (
     <div id="transfer">
       <div className="transferHeader">
@@ -23,26 +67,58 @@ function Transfer() {
       <div className="display1">
         <div className="currencyArea">
           <div className="Balancetext">Your Balance is</div>
-          <h1 className="price">$ 349,000</h1>
+          <h1 className="price">{sign}{roundOff(balance)}</h1>
+          <span class="mainbalance">{sign}{balance}</span>
         </div>
 
         <div className="currencySelection">
           <div className="currencyText">Select Your Currency</div>
           <div className="btns">
-            <button className="btn">$</button>
-            <button className="btn">₦</button>
-            <button className="btn">€</button>
+          <button
+              className="btn"
+              onClick={() =>{setBalance(initialBalance)}}
+            >
+              ($)
+            </button>
+          <button
+              className="btn"
+              onClick={() =>{setSign('\u20A6'); setBalance(initialBalance * data.NGN)}}
+            >
+              (&#8358;)
+            </button>
+            <button
+              className="btn"
+              onClick={() => {setSign('\u20AC'); setBalance(initialBalance * data.EUR)}}
+            >
+              (&euro;)
+            </button>
           </div>
         </div>
       </div>
       <div className="display2">
         <div className="form2">
           <p className="inputText1">Who would you like to send money to?</p>
-          <input className="input" placeholder="Select Contact"></input>
+          <select className="input">
+         {details.map((detail)=>(<option key={detail.id} value={()=>detail.fname}>{detail.fname}{detail.lname}</option>))}
+          </select>
         </div>
         <div className="form2">
           <p className="inputText2">How much would you like to send?</p>
-          <input className="input" placeholder="e.g $ 4,000"></input>
+          <input
+          className="input2"
+            type="number"
+            name="amount"
+            list="amount"
+            placeholder="e.g $4,000"
+            onChange={(event)=>setAmount(event.target.value)}
+            value={amount}
+         />
+          <select id="amount" onChange={(event)=>setSelect(event.target.value)}>
+            <option value="USD">USD</option>
+            <option value="EUR" >EUR</option>
+            <option value="NGN">NGN</option>
+          </select>
+          <p>{select=="EUR"?("\u20AC" + amount * data.EUR):select=="NGN"?("\u20A6" + amount * data.NGN):"$" + amount}</p>
         </div>
       </div>
       <div className="sendCont">

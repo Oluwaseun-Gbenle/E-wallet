@@ -7,7 +7,7 @@
   width: 80%;
   justify-content: space-between;
 }
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 750px) {
   .display1,
   .display2 {
     display: block;
@@ -37,6 +37,24 @@
   margin-right: 150px;
 }
 
+ .mainbalance {
+  visibility: hidden;
+  font-size: 25px;
+  font-weight: 500;
+  background-color: white;
+  color: black;
+  text-align: center;
+  border-radius: 6px;
+  margin-top: 5px;
+  position: absolute;
+  height: 30px;
+  padding: 0 5px 10px 5px;
+  z-index: 1;
+}
+.currencyArea:hover .mainbalance {
+    visibility: visible;
+  }
+  
 .btn {
   border-radius: 5px;
   background-color: #f093ff;
@@ -46,10 +64,19 @@
   padding: 8px;
 }
 .input {
-  border: 1px solid black;
-  height: 15px;
+  height: 35px;
   width: 300px;
+  font-size:17px;
 }
+.input2{
+    height:17px;
+    width:205px;
+    font-size:17px;
+}
+option:checked{
+    background-color: #9a4cfd;
+}
+
 
 .sendCont {
   display: flex;
@@ -61,4 +88,7 @@
   background-color: #9a4cfd;
   text-align: center;
   width: 40%;
+}
+.sendBtn a {
+  text-decoration:none;
 }
