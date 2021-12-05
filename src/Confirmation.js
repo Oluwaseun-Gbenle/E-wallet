@@ -2,36 +2,34 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Transfer.css";
 import "./Balance.css";
-import Balance from "./Balance"
+import Transfer from "./Transfer";
 
-function Confirmation() {
-    const initialBalance=391765;
-    const [balance, setBalance] = useState(initialBalance);
-    const [sign,  setSign] = useState("$");
-    const [data, setData] = useState(null);
+function Confirmation({ handleInput2 }) {
+  const initialBalance = 391765;
+  const [balance, setBalance] = useState(initialBalance);
+  const [sign, setSign] = useState("$");
+  const [data, setData] = useState(null);
 
-    useEffect(() => {
-        async function fetchData() {
-          await axios("https://api.exchangerate-api.com/v4/latest/USD")
-            .then((response) => {
-              setData(response.data.rates);
-            })
-            .catch((err) => console.log("Request Failed", err));
-        }
-        fetchData();
-      }, []);
-      console.log(data);
-    
+  useEffect(() => {
+    async function fetchData() {
+      await axios("https://api.exchangerate-api.com/v4/latest/USD")
+        .then((response) => {
+          setData(response.data.rates);
+        })
+        .catch((err) => console.log("Request Failed", err));
+    }
+    fetchData();
+  }, []);
+  console.log(data);
 
-    const roundOff = (value) =>
-      value >= 1000000000
-        ? (Math.floor(value / 1000000000) * 1000000000) / 1000000000 + "B"
-        : value >= 1000000
-        ? (Math.floor(value / 1000000) * 1000000) / 1000000 + "M"
-        : value >= 1000
-        ? (Math.floor(value / 1000) * 1000) / 1000 + "k"
-        : value;
-
+  const roundOff = (value) =>
+    value >= 1000000000
+      ? (Math.floor(value / 1000000000) * 1000000000) / 1000000000 + "B"
+      : value >= 1000000
+      ? (Math.floor(value / 1000000) * 1000000) / 1000000 + "M"
+      : value >= 1000
+      ? (Math.floor(value / 1000) * 1000) / 1000 + "k"
+      : value;
 
   return (
     <div className="confirmation">
@@ -48,32 +46,42 @@ function Confirmation() {
           </div>
           <div className="transferText1">Confirm Transfer</div>
         </div>
-        <p className="transferText2">You are about to make an irreversible transaction</p>
+        <p className="transferText2">
+          You are about to make an irreversible transaction
+        </p>
       </div>
       <div className="display1">
         <div className="currencyArea">
           <div className="Balancetext">You are about to send</div>
-          <h1 className="price">import from transfer.js</h1>
-          <span class="mainbalance">{sign}{balance}</span>
+          <h1 className="price">{handleInput2}</h1>
+          <span class="mainbalance">{handleInput2}</span>
         </div>
 
         <div className="currencySelection">
-          <div className="btns" style={{marginTop:"33px"}}>
-          <button
+          <div className="btns" style={{ marginTop: "33px" }}>
+            <button
               className="btn"
-              onClick={() =>{setBalance(initialBalance)}}
+              onClick={() => {
+                setBalance(initialBalance);
+              }}
             >
               ($)
-          </button>
-          <button
+            </button>
+            <button
               className="btn"
-              onClick={() =>{setSign('\u20A6'); setBalance(initialBalance * data.NGN)}}
+              onClick={() => {
+                setSign("\u20A6");
+                setBalance(initialBalance * data.NGN);
+              }}
             >
               (&#8358;)
             </button>
             <button
               className="btn"
-              onClick={() => {setSign('\u20AC'); setBalance(initialBalance * data.EUR)}}
+              onClick={() => {
+                setSign("\u20AC");
+                setBalance(initialBalance * data.EUR);
+              }}
             >
               (&euro;)
             </button>
@@ -82,10 +90,12 @@ function Confirmation() {
       </div>
       <div className="transferInitiation" style={{ paddingTop: "50px" }}>
         <p className="introText2">To</p>
-        <div className="transferBox" style={{width:"200px"}}>Emeka Peggs </div>
+        <div className="transferBox" style={{ width: "200px" }}>
+          Emeka Peggs{" "}
+        </div>
       </div>
       <div className="sendCont">
-        <div onClick={initialBalance-5} className="sendBtn">
+        <div onClick={initialBalance - 5} className="sendBtn">
           <a href="/">Confirm</a>
         </div>
       </div>

@@ -1,3 +1,10 @@
+
+Unable get value from the debit input in Transfer.js and view in Confirmation.js because of separate pages.
+ Unable to get value deducted in order to subtract from main balance because of issue above.
+ With more time i should be able to resolve this.
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
