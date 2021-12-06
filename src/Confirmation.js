@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Transfer.css";
 import "./Balance.css";
-import Transfer from "./Transfer";
+import Balance from "./Balance";
 
-function Confirmation() {
+function Confirmation({ amount, name }) {
   const initialBalance = 391765;
-  const [balance, setBalance] = useState(initialBalance);
-  const [sign, setSign] = useState("$");
+  const sign = "$";
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -53,35 +52,27 @@ function Confirmation() {
       <div className="display1">
         <div className="currencyArea">
           <div className="Balancetext">You are about to send</div>
-          <h1 className="price">{}</h1>
-          <span class="mainbalance">{}</span>
+          <h1 className="price">
+            {sign}
+            {roundOff(amount)}
+          </h1>
+          <span class="mainbalance">{amount}</span>
         </div>
 
         <div className="currencySelection">
           <div className="btns" style={{ marginTop: "33px" }}>
-            <button
-              className="btn"
-              onClick={() => {
-                setBalance(initialBalance);
-              }}
-            >
+            <button className="btn" onClick={() => amount}>
               ($)
             </button>
             <button
               className="btn"
-              onClick={() => {
-                setSign("\u20A6");
-                setBalance(initialBalance * data.NGN);
-              }}
+              onClick={() => "\u20A6" + amount * data.NGN}
             >
               (&#8358;)
             </button>
             <button
               className="btn"
-              onClick={() => {
-                setSign("\u20AC");
-                setBalance(initialBalance * data.EUR);
-              }}
+              onClick={() => "\u20AC" + amount * data.EUR}
             >
               (&euro;)
             </button>
@@ -91,7 +82,7 @@ function Confirmation() {
       <div className="transferInitiation" style={{ paddingTop: "50px" }}>
         <p className="introText2">To</p>
         <div className="transferBox" style={{ width: "200px" }}>
-          Emeka Peggs{" "}
+          {name}
         </div>
       </div>
       <div className="sendCont">
@@ -99,6 +90,7 @@ function Confirmation() {
           <a href="/">Confirm</a>
         </div>
       </div>
+      <Balance amount={amount} name={name} />
     </div>
   );
 }

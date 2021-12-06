@@ -1,43 +1,31 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Transfer.css";
-import Confirmation from "./Confirmation"
-
+import { users } from "./details";
+import Confirmation from "./Confirmation";
 
 function Transfer() {
   const [data, setData] = useState(null);
   const [select, setSelect] = useState("USD");
-  const [details, setDetails] = useState(null);
+  const [name, setName] = useState("Lola James");
   const [amount, setAmount] = useState(0);
   const initialBalance = 391765;
   const [balance, setBalance] = useState(initialBalance);
   const [sign, setSign] = useState("$");
 
-useEffect(() => {
-      async function fetchDetails() {
-     fetch('https://e-wallet.glitch.me/api/details')
-    .then(response => response.json())  
-    .then(data => setDetails(data))    
-    .catch(err => console.log('Request Failed', err));
-    }
-     fetchDetails();
-  }, []);
-  console.log(details);
-
-
- useEffect(() => {
-      async function fetchData() {
+  useEffect(() => {
+    async function fetchData() {
       await axios("https://api.exchangerate-api.com/v4/latest/USD")
         .then((response) => {
           setData(response.data.rates);
         })
         .catch((err) => console.log("Request Failed", err));
     }
-     fetchData();
+    fetchData();
   }, []);
   console.log(data);
 
-const handleInput = (event) => {
+  const handleInput = (event) => {
     setAmount(event.target.value);
   };
 
@@ -115,7 +103,16 @@ const handleInput = (event) => {
       <div className="display2">
         <div className="form2">
           <p className="inputText1">Who would you like to send money to?</p>
-         { /* <select className="input">{details.forEach(d => (<div key={d.id} value={d.fname}>{d.fname} {d.lname}</div>))}</select> */}
+          <select
+            className="input"
+            onChange={(event) => setName(event.target.value)}
+          >
+            {users.map((d) => (
+              <option value={`${d.fname} ${d.lname}`}>
+                {d.fname} {d.lname}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="form2">
           <p className="inputText2">How much would you like to send?</p>
@@ -149,6 +146,9 @@ const handleInput = (event) => {
         <div className="sendBtn">
           <a href="/Confirmation">Send</a>
         </div>
+      </div>
+      <div>
+        <Confirmation amount={amount} name={name} />
       </div>
     </div>
   );

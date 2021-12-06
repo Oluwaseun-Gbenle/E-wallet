@@ -1,10 +1,10 @@
 ## Exchange rate gotten from exchangerateapi.io
-## User details api created in glitch.com
+User details api created in glitch.com was unable to use because of inablity to map through
+Had to delete reactRouter which views pages separately because the app was not viewable after adding.
+Unable to learn redux within limited time for storage of values in state.
 
-Unable get value from the debit input in Transfer.js and view in Confirmation.js because of separate pages.
- Unable to get value deducted in order to subtract from main balance because of issue above.
- With more time i should be able to resolve this.
 
+# link to hosted site http://Oluwaseun-Gbenle.github.io/E-wallet
 
 
 # Getting Started with Create React App

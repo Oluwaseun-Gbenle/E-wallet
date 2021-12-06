@@ -1,5 +1,4 @@
-{
-    "users":[
+ export const users=[
    {
      "fname":"Lola",
       "lname":"James",
@@ -35,4 +34,5 @@
       "lname":"Rogers",
       "walletbalance":2000
    }
-    ]}
+    ]
+  

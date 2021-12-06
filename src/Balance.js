@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Balance.css";
+import Transfer from "./Transfer";
 
-function Balance() {
+function Balance({ amount, name }) {
   const initialBalance = 391675;
   const [balance, setBalance] = useState(initialBalance);
   const [sign, setSign] = useState("$");
@@ -18,14 +19,14 @@ function Balance() {
       : value;
 
   useEffect(() => {
-      async function fetchData() {
+    async function fetchData() {
       await axios("https://api.exchangerate-api.com/v4/latest/USD")
         .then((response) => {
           setData(response.data.rates);
         })
         .catch((err) => console.log("Request Failed", err));
     }
-     fetchData();
+    fetchData();
   }, []);
   console.log(data);
 
@@ -86,15 +87,18 @@ function Balance() {
       </div>
       <div className="history">
         <div className="historyCase">
-          <p className="name">Credit from John Usman</p>
-          <p className="amount">$1000</p>
+          <p className="name">Credit from Ayo Abolaji</p>
+          <p className="amount">{amount}</p>
         </div>
         <div className="historyCase">
-          <p className="name">Transfer to Olaide Ismail</p>
+          <p className="name">Transfer to {name}</p>
           <p className="amount" style={{ color: "rgb(207, 5, 5)" }}>
             -$5200
           </p>
         </div>
+      </div>
+      <div>
+        <Transfer />
       </div>
     </div>
   );
