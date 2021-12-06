@@ -1,3 +1,5 @@
+## Exchange rate gotten from exchangerateapi.io
+## User details api created in glitch.com
 
 Unable get value from the debit input in Transfer.js and view in Confirmation.js because of separate pages.
  Unable to get value deducted in order to subtract from main balance because of issue above.

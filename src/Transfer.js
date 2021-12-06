@@ -1,68 +1,43 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Transfer.css";
+import Confirmation from "./Confirmation"
 
-function Transfer({ handleInput }) {
+
+function Transfer() {
   const [data, setData] = useState(null);
   const [select, setSelect] = useState("USD");
+  const [details, setDetails] = useState(null);
   const [amount, setAmount] = useState(0);
   const initialBalance = 391765;
   const [balance, setBalance] = useState(initialBalance);
   const [sign, setSign] = useState("$");
 
-  useEffect(() => {
-    async function fetchData() {
+useEffect(() => {
+      async function fetchDetails() {
+     fetch('https://e-wallet.glitch.me/api/details')
+    .then(response => response.json())  
+    .then(data => setDetails(data))    
+    .catch(err => console.log('Request Failed', err));
+    }
+     fetchDetails();
+  }, []);
+  console.log(details);
+
+
+ useEffect(() => {
+      async function fetchData() {
       await axios("https://api.exchangerate-api.com/v4/latest/USD")
         .then((response) => {
           setData(response.data.rates);
         })
         .catch((err) => console.log("Request Failed", err));
     }
-    fetchData();
+     fetchData();
   }, []);
   console.log(data);
 
-  const details = {
-    users: [
-      {
-        fname: "Lola",
-        lname: "James",
-        walletbalance: 10456,
-      },
-
-      {
-        fname: "Chinedu",
-        lname: "Okoro",
-        walletbalance: 59876,
-      },
-
-      {
-        fname: "Mahmoud",
-        lname: "Audu",
-        walletbalance: 295615,
-      },
-
-      {
-        fname: "Stephen",
-        lname: "Sans",
-        walletbalance: 1002334,
-      },
-
-      {
-        fname: "James",
-        lname: "Alfred",
-        walletbalance: 345664,
-      },
-
-      {
-        fname: "Rita",
-        lname: "Rogers",
-        walletbalance: 2000,
-      },
-    ],
-  };
-
-  handleInput = (event) => {
+const handleInput = (event) => {
     setAmount(event.target.value);
   };
 
@@ -140,7 +115,7 @@ function Transfer({ handleInput }) {
       <div className="display2">
         <div className="form2">
           <p className="inputText1">Who would you like to send money to?</p>
-          <select className="input"></select>
+          <select className="input">{details.map(d => (<option key={d.id} value={d.fname}>{d.fname} {d.lname}</option>))}</select>
         </div>
         <div className="form2">
           <p className="inputText2">How much would you like to send?</p>

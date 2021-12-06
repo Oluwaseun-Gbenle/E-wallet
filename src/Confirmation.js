@@ -4,7 +4,7 @@ import "./Transfer.css";
 import "./Balance.css";
 import Transfer from "./Transfer";
 
-function Confirmation({ handleInput2 }) {
+function Confirmation() {
   const initialBalance = 391765;
   const [balance, setBalance] = useState(initialBalance);
   const [sign, setSign] = useState("$");
@@ -53,8 +53,8 @@ function Confirmation({ handleInput2 }) {
       <div className="display1">
         <div className="currencyArea">
           <div className="Balancetext">You are about to send</div>
-          <h1 className="price">{handleInput2}</h1>
-          <span class="mainbalance">{handleInput2}</span>
+          <h1 className="price">{}</h1>
+          <span class="mainbalance">{}</span>
         </div>
 
         <div className="currencySelection">

@@ -18,14 +18,14 @@ function Balance() {
       : value;
 
   useEffect(() => {
-    async function fetchData() {
+      async function fetchData() {
       await axios("https://api.exchangerate-api.com/v4/latest/USD")
         .then((response) => {
           setData(response.data.rates);
         })
         .catch((err) => console.log("Request Failed", err));
     }
-    fetchData();
+     fetchData();
   }, []);
   console.log(data);
 
