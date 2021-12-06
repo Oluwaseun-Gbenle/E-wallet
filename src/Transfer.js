@@ -115,7 +115,7 @@ const handleInput = (event) => {
       <div className="display2">
         <div className="form2">
           <p className="inputText1">Who would you like to send money to?</p>
-          
+         { /* <select className="input">{details.forEach(d => (<div key={d.id} value={d.fname}>{d.fname} {d.lname}</div>))}</select> */}
         </div>
         <div className="form2">
           <p className="inputText2">How much would you like to send?</p>
