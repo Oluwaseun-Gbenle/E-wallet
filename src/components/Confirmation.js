@@ -4,7 +4,7 @@ import "./Transfer.css";
 import "./Balance.css";
 import { Link } from "react-router-dom";
 
-function Confirmation({ amount, name }) {
+function Confirmation({amount, name}) {
   const initialBalance = 391765;
   const sign = "$";
   const [data, setData] = useState(null);

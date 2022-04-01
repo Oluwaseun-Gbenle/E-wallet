@@ -14,7 +14,7 @@ render(
   <Routes>
     <Route path="/" element={<Balance />} />
     <Route path="Transfer" element={<Transfer />} />
-    <Route path="Confirmation" element={<Confirmation />} />
+    <Route path="Confirmation" element={<Confirmation amount/>} />
   </Routes>
 </BrowserRouter>,
  rootElement);
