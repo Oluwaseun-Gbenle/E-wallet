@@ -1,13 +1,18 @@
 import React from "react";
 import "./App.css";
-import Balance from "./Balance";
+import { Link } from "react-router-dom";
+import Balance from "./components/Balance";
+import Transfer from "./components/Transfer";
+import Confirmation from "./components/Confirmation";
 
-function App() {
-  return (
-    <div id="App">
-      <Balance />
-    </div>
-  );
-}
+  
+  function App() {
+    return (
+      <div>
 
-export default App;
+        
+      </div>
+    )
+  }
+  
+  export default App

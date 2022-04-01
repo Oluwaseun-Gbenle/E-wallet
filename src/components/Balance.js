@@ -97,9 +97,6 @@ function Balance({ amount, name }) {
           </p>
         </div>
       </div>
-      <div>
-        <Transfer />
-      </div>
     </div>
   );
 }

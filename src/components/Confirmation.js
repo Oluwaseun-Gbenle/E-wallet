@@ -90,7 +90,6 @@ function Confirmation({ amount, name }) {
           <a href="/">Confirm</a>
         </div>
       </div>
-      <Balance amount={amount} name={name} />
     </div>
   );
 }

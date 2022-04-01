@@ -147,9 +147,6 @@ function Transfer() {
           <a href="/Confirmation">Send</a>
         </div>
       </div>
-      <div>
-        <Confirmation amount={amount} name={name} />
-      </div>
     </div>
   );
 }
