@@ -1,6 +1,9 @@
 #balance {
   display: flex;
   flex-direction: column;
+  margin: 50px;
+  margin-bottom: 0;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .intro {
@@ -17,11 +20,13 @@
   display: flex;
   justify-content: space-between;
   background-color: #9a4cfd;
+ padding: 13px 20px 0px 20px ;
   color: white;
-  height: 120px;
+  height: 110px;
   width: 65%;
   border-radius: 15px;
 }
+
 .balanceBox .mainbalance {
   visibility: hidden;
   font-size: 25px;
@@ -42,7 +47,7 @@
 
 .fig {
   font-weight: 700;
-  font-size: 30px;
+  font-size: 27px;
 }
 
 .convert {

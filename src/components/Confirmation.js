@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Transfer.css";
 import "./Balance.css";
-import Balance from "./Balance";
+import { Link } from "react-router-dom";
 
 function Confirmation({ amount, name }) {
   const initialBalance = 391765;
@@ -31,17 +31,15 @@ function Confirmation({ amount, name }) {
       : value;
 
   return (
-    <div className="confirmation">
+    <div id="confirmation">
       <div className="transferHeader">
         <div className="transferText1Box">
           <div className="back-icon">
-            <a href="/Transfer">
-              <img
+            <Link to="/Transfer"><img
                 className="arrow-1"
                 src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0xMiAwYzYuNjIzIDAgMTIgNS4zNzcgMTIgMTJzLTUuMzc3IDEyLTEyIDEyLTEyLTUuMzc3LTEyLTEyIDUuMzc3LTEyIDEyLTEyem0wIDFjNi4wNzEgMCAxMSA0LjkyOSAxMSAxMXMtNC45MjkgMTEtMTEgMTEtMTEtNC45MjktMTEtMTEgNC45MjktMTEgMTEtMTF6bS00LjgyOCAxMS41bDQuNjA4IDMuNzYzLS42NzkuNzM3LTYuMTAxLTUgNi4xMTItNSAuNjY2Ljc1My00LjYwNCAzLjc0N2gxMS44MjZ2MWgtMTEuODI4eiIvPjwvc3ZnPg=="
                 alt="arrow"
-              />
-            </a>
+              /></Link>
           </div>
           <div className="transferText1">Confirm Transfer</div>
         </div>
@@ -87,7 +85,7 @@ function Confirmation({ amount, name }) {
       </div>
       <div className="sendCont">
         <div onClick={initialBalance - 5} className="sendBtn">
-          <a href="/">Confirm</a>
+        <Link to="/">Confirm</Link>
         </div>
       </div>
     </div>

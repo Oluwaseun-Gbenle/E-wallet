@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Balance.css";
-import Transfer from "./Transfer";
+import { Link } from "react-router-dom";
 
 function Balance({ amount, name }) {
   const initialBalance = 391675;
@@ -47,7 +47,16 @@ function Balance({ amount, name }) {
         </div>
 
         <div className="convert">
-          <p>CONVERT</p>
+          <p style={{textAlign:"center"}}>CONVERT</p>
+          <button
+            className="btn"
+            onClick={() => {
+              setSign("$");
+              setBalance(initialBalance);
+            }}
+          >
+            ($)
+          </button>
           <button
             className="btn"
             onClick={() => {
@@ -76,9 +85,7 @@ function Balance({ amount, name }) {
       <div className="transferInitiation" style={{ paddingTop: "50px" }}>
         <p className="introText2">What would you like to do today?</p>
         <div className="transferBox">
-          <a style={{ textDecoration: "none" }} href="/Transfer">
-            Transfer
-          </a>
+          <Link style={{ textDecoration: "none" }} to="/Transfer">Transfer</Link>
         </div>
       </div>
 

@@ -1,3 +1,7 @@
+#transfer,
+#confirmation{
+  margin: 50px;
+}
 .transferHeader {
   line-height: 10px;
 }
@@ -6,6 +10,7 @@
   display: flex;
   width: 80%;
   justify-content: space-between;
+  
 }
 @media screen and (max-width: 800px) {
   .display1,
@@ -20,6 +25,7 @@
 }
 .back-icon {
   padding: 0;
+  margin-right: 10px;
 }
 .arrow-1 {
   margin-left: -9px;
@@ -88,6 +94,8 @@ option:checked{
   background-color: #9a4cfd;
   text-align: center;
   width: 40%;
+  padding-top: 10px;
+  padding-bottom: 10px;
   
 }
 .sendBtn a {

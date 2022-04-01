@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Transfer.css";
 import { users } from "./details";
-import Confirmation from "./Confirmation";
+import { Link } from "react-router-dom";
 
 function Transfer() {
   const [data, setData] = useState(null);
@@ -43,15 +43,15 @@ function Transfer() {
       <div className="transferHeader">
         <div className="transferText1Box">
           <div className="back-icon">
-            <a href="/">
+            <Link to="/">
               <img
                 className="arrow-1"
                 src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0xMiAwYzYuNjIzIDAgMTIgNS4zNzcgMTIgMTJzLTUuMzc3IDEyLTEyIDEyLTEyLTUuMzc3LTEyLTEyIDUuMzc3LTEyIDEyLTEyem0wIDFjNi4wNzEgMCAxMSA0LjkyOSAxMSAxMXMtNC45MjkgMTEtMTEgMTEtMTEtNC45MjktMTEtMTEgNC45MjktMTEgMTEtMTF6bS00LjgyOCAxMS41bDQuNjA4IDMuNzYzLS42NzkuNzM3LTYuMTAxLTUgNi4xMTItNSAuNjY2Ljc1My00LjYwNCAzLjc0N2gxMS44MjZ2MWgtMTEuODI4eiIvPjwvc3ZnPg=="
                 alt="arrow"
               />
-            </a>
+            </Link>
           </div>
-          <div className="transferText1">Transfer</div>
+          <div className="transferText1"> Transfer</div>
         </div>
         <p className="transferText2">Here, you can transfer money to anyone</p>
       </div>
@@ -144,7 +144,7 @@ function Transfer() {
       </div>
       <div className="sendCont">
         <div className="sendBtn">
-          <a href="/Confirmation">Send</a>
+          <Link to="/Confirmation">Send</Link>
         </div>
       </div>
     </div>
