@@ -3,11 +3,19 @@ import axios from "axios";
 import "./Transfer.css";
 import "./Balance.css";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { valueAmount } from "../slices/amountSlice";
+import { valueUser } from "../slices/userSlice";
 
-function Confirmation({amount, name}) {
-  const initialBalance = 391765;
-  const sign = "$";
+
+
+function Confirmation() {
   const [data, setData] = useState(null);
+  const amountImport = useSelector(valueAmount);
+  const name = useSelector(valueUser);
+  const[amount, setAmount] = useState(amountImport);
+  const [sign, setSign] = useState("$");
+  
 
   useEffect(() => {
     async function fetchData() {
@@ -29,6 +37,8 @@ function Confirmation({amount, name}) {
       : value >= 1000
       ? (Math.floor(value / 1000) * 1000) / 1000 + "k"
       : value;
+
+      
 
   return (
     <div id="confirmation">
@@ -59,18 +69,25 @@ function Confirmation({amount, name}) {
 
         <div className="currencySelection">
           <div className="btns" style={{ marginTop: "33px" }}>
-            <button className="btn" onClick={() => amount}>
+            <button className="btn" onClick={() => setAmount(amountImport)}
+            >
               ($)
             </button>
             <button
               className="btn"
-              onClick={() => "\u20A6" + amount * data.NGN}
+              onClick={() => {
+                setSign("\u20A6");
+                setAmount(amountImport * data.NGN);
+              }}
             >
               (&#8358;)
             </button>
             <button
               className="btn"
-              onClick={() => "\u20AC" + amount * data.EUR}
+              onClick={() => {
+                setSign("\u20AC");
+                setAmount(amountImport * data.EUR);
+              }}
             >
               (&euro;)
             </button>
@@ -80,11 +97,11 @@ function Confirmation({amount, name}) {
       <div className="transferInitiation" style={{ paddingTop: "50px" }}>
         <p className="introText2">To</p>
         <div className="transferBox" style={{ width: "200px" }}>
-          {name}
+         {name}
         </div>
       </div>
       <div className="sendCont">
-        <div onClick={initialBalance - 5} className="sendBtn">
+        <div  className="sendBtn">
         <Link to="/">Confirm</Link>
         </div>
       </div>

@@ -3,15 +3,23 @@ import axios from "axios";
 import "./Transfer.css";
 import { users } from "./details";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { saveAmount } from "../slices/amountSlice";
+import { saveUser } from "../slices/userSlice";
+import { useSelector } from "react-redux";
+import { valueBalance } from "../slices/balanceSlice";
+
 
 function Transfer() {
+  const initialBalance = useSelector(valueBalance);
+  const dispatch = useDispatch(); // <-- dispatch function
   const [data, setData] = useState(null);
   const [select, setSelect] = useState("USD");
-  const [name, setName] = useState("Lola James");
+  const [name, setName] = useState("");
   const [amount, setAmount] = useState(0);
-  const initialBalance = 391765;
   const [balance, setBalance] = useState(initialBalance);
   const [sign, setSign] = useState("$");
+  
 
   useEffect(() => {
     async function fetchData() {
@@ -28,6 +36,11 @@ function Transfer() {
   const handleInput = (event) => {
     setAmount(event.target.value);
   };
+
+const handleSubmit = (e) => {
+  dispatch(saveAmount(amount))
+  dispatch(saveUser(name))
+}
 
   const roundOff = (value) =>
     value >= 1000000000
@@ -143,7 +156,7 @@ function Transfer() {
         </div>
       </div>
       <div className="sendCont">
-        <div className="sendBtn">
+        <div onClick={handleSubmit}  className="sendBtn">
           <Link to="/Confirmation">Send</Link>
         </div>
       </div>

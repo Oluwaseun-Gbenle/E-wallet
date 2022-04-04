@@ -1,5 +1,11 @@
  export const users=[
-   {
+  {
+    "fname":"Kingsley",
+     "lname":"Franklin",
+     "walletbalance":391675
+  }, 
+  
+  {
      "fname":"Lola",
       "lname":"James",
       "walletbalance":10456

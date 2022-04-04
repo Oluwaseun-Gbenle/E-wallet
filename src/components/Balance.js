@@ -2,13 +2,25 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Balance.css";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { valueAmount } from "../slices/amountSlice";
+import { valueUser } from "../slices/userSlice";
+import { valueBalance } from "../slices/balanceSlice";
+import {saveBalance} from "../slices/balanceSlice";
+import { useDispatch } from "react-redux";
+import { users } from "./details";
 
-function Balance({ amount, name }) {
-  const initialBalance = 391675;
+
+function Balance() {
+  const initialBalance = useSelector(valueBalance)
   const [balance, setBalance] = useState(initialBalance);
   const [sign, setSign] = useState("$");
   const [data, setData] = useState(null);
-
+  const amountImport = useSelector(valueAmount);
+  const name = useSelector(valueUser);
+  const dispatch = useDispatch()
+  
+ const mainBalance = initialBalance - amountImport
   const roundOff = (value) =>
     value >= 1000000000
       ? (Math.floor(value / 1000000000) * 1000000000) / 1000000000 + "B"
@@ -30,6 +42,10 @@ function Balance({ amount, name }) {
   }, []);
   console.log(data);
 
+  const handleSubmit = (e) => {
+    dispatch(saveBalance(mainBalance))
+  }
+
   return (
     <div id="balance">
       <div className="intro">
@@ -42,17 +58,17 @@ function Balance({ amount, name }) {
           <p>BALANCE</p>
           <p className="fig">
             {sign}
-            {roundOff(balance)}
+            {roundOff(mainBalance)}
           </p>
         </div>
 
         <div className="convert">
-          <p style={{textAlign:"center"}}>CONVERT</p>
+          <p style={{ textAlign: "center" }}>CONVERT</p>
           <button
             className="btn"
             onClick={() => {
               setSign("$");
-              setBalance(initialBalance);
+              setBalance(mainBalance);
             }}
           >
             ($)
@@ -61,7 +77,7 @@ function Balance({ amount, name }) {
             className="btn"
             onClick={() => {
               setSign("\u20A6");
-              setBalance(initialBalance * data.NGN);
+              setBalance(mainBalance * data.NGN);
             }}
           >
             (&#8358;)
@@ -70,7 +86,7 @@ function Balance({ amount, name }) {
             className="btn"
             onClick={() => {
               setSign("\u20AC");
-              setBalance(initialBalance * data.EUR);
+              setBalance(mainBalance * data.EUR);
             }}
           >
             (&euro;)
@@ -78,15 +94,17 @@ function Balance({ amount, name }) {
         </div>
         <span class="mainbalance">
           {sign}
-          {balance}
+          {mainBalance}
         </span>
       </div>
 
       <div className="transferInitiation" style={{ paddingTop: "50px" }}>
         <p className="introText2">What would you like to do today?</p>
-        <div className="transferBox">
-          <Link style={{ textDecoration: "none" }} to="/Transfer">Transfer</Link>
-        </div>
+        
+          <Link onClick={handleSubmit} style={{ textDecoration: "none" }} to="/Transfer">
+           <div className="transferBox"> Transfer </div>
+          </Link>
+       
       </div>
 
       <div className="introText2" style={{ paddingTop: "30px" }}>
@@ -95,14 +113,21 @@ function Balance({ amount, name }) {
       <div className="history">
         <div className="historyCase">
           <p className="name">Credit from Ayo Abolaji</p>
-          <p className="amount">{amount}</p>
+          <p className="amount">$9000</p>
         </div>
         <div className="historyCase">
           <p className="name">Transfer to {name}</p>
           <p className="amount" style={{ color: "rgb(207, 5, 5)" }}>
-            -$5200
+           -${amountImport} 
           </p>
         </div>
+       {/* {users.map((e)=>(
+        <div className="historyCase">
+          <p className="name">Transfer to Name</p>
+          <p className="amount" style={{ color: "rgb(207, 5, 5)" }}>
+            {amount}
+          </p>
+        </div>))}*/}
       </div>
     </div>
   );
