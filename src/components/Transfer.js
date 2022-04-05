@@ -3,10 +3,9 @@ import axios from "axios";
 import "./Transfer.css";
 import { users } from "./details";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { saveAmount } from "../slices/amountSlice";
 import { saveUser } from "../slices/userSlice";
-import { useSelector } from "react-redux";
 import { valueBalance } from "../slices/balanceSlice";
 
 
@@ -120,6 +119,7 @@ const handleSubmit = (e) => {
             className="input"
             onChange={(event) => setName(event.target.value)}
           >
+             <option value="" disabled selected>Select your option</option>
             {users.map((d) => (
               <option value={`${d.fname} ${d.lname}`}>
                 {d.fname} {d.lname}

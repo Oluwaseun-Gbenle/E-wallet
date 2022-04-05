@@ -1,26 +1,32 @@
 import React, { useEffect, useState } from "react";
+import List from "./List";
 import axios from "axios";
 import "./Balance.css";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { valueAmount } from "../slices/amountSlice";
 import { valueUser } from "../slices/userSlice";
 import { valueBalance } from "../slices/balanceSlice";
-import {saveBalance} from "../slices/balanceSlice";
-import { useDispatch } from "react-redux";
-import { users } from "./details";
-
+import { saveBalance } from "../slices/balanceSlice";
+import { selectList } from "../slices/listSlice";
+import { savelist } from "../slices/listSlice";
 
 function Balance() {
-  const initialBalance = useSelector(valueBalance)
-  const [balance, setBalance] = useState(initialBalance);
+  const list = useSelector(selectList);
+  const initialBalance = useSelector(valueBalance);
   const [sign, setSign] = useState("$");
   const [data, setData] = useState(null);
   const amountImport = useSelector(valueAmount);
   const name = useSelector(valueUser);
-  const dispatch = useDispatch()
-  
- const mainBalance = initialBalance - amountImport
+  const [balance, setBalance] = useState(initialBalance);
+  const dispatch = useDispatch();
+
+    const addList = () => {
+        const structure = {amountImport,name}
+        dispatch(savelist(structure));
+      };
+
+  const mainBalance = initialBalance - amountImport;
   const roundOff = (value) =>
     value >= 1000000000
       ? (Math.floor(value / 1000000000) * 1000000000) / 1000000000 + "B"
@@ -43,8 +49,8 @@ function Balance() {
   console.log(data);
 
   const handleSubmit = (e) => {
-    dispatch(saveBalance(mainBalance))
-  }
+    dispatch(saveBalance(mainBalance));
+  };
 
   return (
     <div id="balance">
@@ -100,11 +106,14 @@ function Balance() {
 
       <div className="transferInitiation" style={{ paddingTop: "50px" }}>
         <p className="introText2">What would you like to do today?</p>
-        
-          <Link onClick={handleSubmit} style={{ textDecoration: "none" }} to="/Transfer">
-           <div className="transferBox"> Transfer </div>
-          </Link>
-       
+
+        <Link
+          onClick={()=> {handleSubmit(); addList();}}
+          style={{ textDecoration: "none" }}
+          to="/Transfer"
+        >
+          <div className="transferBox"> Transfer </div>
+        </Link>
       </div>
 
       <div className="introText2" style={{ paddingTop: "30px" }}>
@@ -115,19 +124,13 @@ function Balance() {
           <p className="name">Credit from Ayo Abolaji</p>
           <p className="amount">$9000</p>
         </div>
-        <div className="historyCase">
-          <p className="name">Transfer to {name}</p>
-          <p className="amount" style={{ color: "rgb(207, 5, 5)" }}>
-           -${amountImport} 
-          </p>
-        </div>
-       {/* {users.map((e)=>(
-        <div className="historyCase">
-          <p className="name">Transfer to Name</p>
-          <p className="amount" style={{ color: "rgb(207, 5, 5)" }}>
-            {amount}
-          </p>
-        </div>))}*/}
+        {list.map((e, i) => (
+         <List 
+          key={i}
+          newName={e.name}
+          amount={e.amountImport}
+          />
+        ))}
       </div>
     </div>
   );
