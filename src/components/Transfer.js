@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { saveAmount } from "../slices/amountSlice";
 import { saveUser } from "../slices/userSlice";
 import { valueBalance } from "../slices/balanceSlice";
-import { savelist } from "../slices/listSlice";
 
 function Transfer() {
   const initialBalance = useSelector(valueBalance);
@@ -18,11 +17,6 @@ function Transfer() {
   const [amount, setAmount] = useState(0);
   const [balance, setBalance] = useState(initialBalance);
   const [sign, setSign] = useState("$");
-  
-  const addList = () => {
-    const structure = {amount,name}
-    dispatch(savelist(structure));
-  };
 
 
   useEffect(() => {
@@ -54,6 +48,7 @@ const handleSubmit = (e) => {
       : value >= 1000
       ? (Math.floor(value / 1000) * 1000) / 1000 + "k"
       : value;
+
 
   return (
     <div id="transfer">
@@ -91,6 +86,7 @@ const handleSubmit = (e) => {
             <button
               className="btn"
               onClick={() => {
+                setSign("$");
                 setBalance(initialBalance);
               }}
             >
@@ -161,7 +157,7 @@ const handleSubmit = (e) => {
         </div>
       </div>
       <div className="sendCont">
-        <div onClick={()=>{handleSubmit(); addList()}}  className="sendBtn">
+        <div onClick={()=>{handleSubmit();}}  className="sendBtn">
           <Link to="/Confirmation">Send</Link>
         </div>
       </div>

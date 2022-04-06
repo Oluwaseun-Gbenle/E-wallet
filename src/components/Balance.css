@@ -20,16 +20,15 @@
   display: flex;
   justify-content: space-between;
   background-color: #9a4cfd;
- padding: 13px 20px 0px 20px ;
+  padding: 13px 20px 0px 20px;
   color: white;
   height: 110px;
   width: 65%;
   border-radius: 15px;
 }
 
-@media screen and (max-width: 500px){
-
-  .balanceBox{
+@media screen and (max-width: 500px) {
+  .balanceBox {
     width: 100%;
   }
 }
@@ -42,11 +41,13 @@
   color: black;
   text-align: center;
   border-radius: 6px;
-  margin-top: 90px;
+  margin-top: 95px;
   position: absolute;
   height: 30px;
-  padding: 0 5px 10px 5px;
+  padding: 5px;
   z-index: 1;
+  -webkit-box-shadow: -5px 4px 15px -1px #000000;
+  box-shadow: -5px 4px 15px -1px #000000;
 }
 .balanceBox:hover .mainbalance {
   visibility: visible;
@@ -69,9 +70,8 @@
   padding: 8px;
 }
 
-@media screen and (max-width: 345px){
-
-  .btn{
+@media screen and (max-width: 345px) {
+  .btn {
     width: 29px;
   }
 }

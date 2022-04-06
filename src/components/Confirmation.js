@@ -3,9 +3,10 @@ import axios from "axios";
 import "./Transfer.css";
 import "./Balance.css";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { valueAmount } from "../slices/amountSlice";
 import { valueUser } from "../slices/userSlice";
+import { savelist } from "../slices/listSlice";
 
 
 
@@ -15,7 +16,12 @@ function Confirmation() {
   const name = useSelector(valueUser);
   const[amount, setAmount] = useState(amountImport);
   const [sign, setSign] = useState("$");
+  const dispatch = useDispatch();
   
+  const addList = () => {
+    const structure = {amount,name}
+    dispatch(savelist(structure));
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -101,7 +107,7 @@ function Confirmation() {
         </div>
       </div>
       <div className="sendCont">
-        <div  className="sendBtn">
+        <div  onClick={addList} className="sendBtn">
         <Link to="/">Confirm</Link>
         </div>
       </div>

@@ -16,12 +16,11 @@ function Balance() {
   const [sign, setSign] = useState("$");
   const [data, setData] = useState(null);
   const amountImport = useSelector(valueAmount);
-  const [balance, setBalance] = useState(initialBalance);
+  const mainBalance = initialBalance - amountImport;
+  const [balance, setBalance] = useState(mainBalance);
   const dispatch = useDispatch();
 
    
-
-  const mainBalance = initialBalance - amountImport;
   const roundOff = (value) =>
     value >= 1000000000
       ? (Math.floor(value / 1000000000) * 1000000000) / 1000000000 + "B"
@@ -60,7 +59,7 @@ function Balance() {
           <p>BALANCE</p>
           <p className="fig">
             {sign}
-            {roundOff(mainBalance)}
+            {roundOff(balance)}
           </p>
         </div>
 
@@ -79,7 +78,7 @@ function Balance() {
             className="btn"
             onClick={() => {
               setSign("\u20A6");
-              setBalance(mainBalance * data.NGN);
+              setBalance(mainBalance * data.NGN)
             }}
           >
             (&#8358;)
@@ -96,7 +95,7 @@ function Balance() {
         </div>
         <span class="mainbalance">
           {sign}
-          {mainBalance}
+          {balance}
         </span>
       </div>
 
