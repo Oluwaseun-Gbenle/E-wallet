@@ -5,11 +5,10 @@ import "./Balance.css";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { valueAmount } from "../slices/amountSlice";
-import { valueUser } from "../slices/userSlice";
 import { valueBalance } from "../slices/balanceSlice";
 import { saveBalance } from "../slices/balanceSlice";
 import { selectList } from "../slices/listSlice";
-import { savelist } from "../slices/listSlice";
+
 
 function Balance() {
   const list = useSelector(selectList);
@@ -17,14 +16,10 @@ function Balance() {
   const [sign, setSign] = useState("$");
   const [data, setData] = useState(null);
   const amountImport = useSelector(valueAmount);
-  const name = useSelector(valueUser);
   const [balance, setBalance] = useState(initialBalance);
   const dispatch = useDispatch();
 
-    const addList = () => {
-        const structure = {amountImport,name}
-        dispatch(savelist(structure));
-      };
+   
 
   const mainBalance = initialBalance - amountImport;
   const roundOff = (value) =>
@@ -52,6 +47,7 @@ function Balance() {
     dispatch(saveBalance(mainBalance));
   };
 
+  
   return (
     <div id="balance">
       <div className="intro">
@@ -108,7 +104,7 @@ function Balance() {
         <p className="introText2">What would you like to do today?</p>
 
         <Link
-          onClick={()=> {handleSubmit(); addList();}}
+          onClick={()=> {handleSubmit()}}
           style={{ textDecoration: "none" }}
           to="/Transfer"
         >
@@ -128,7 +124,7 @@ function Balance() {
          <List 
           key={i}
           newName={e.name}
-          amount={e.amountImport}
+          amount={e.amount}
           />
         ))}
       </div>

@@ -27,6 +27,13 @@
   border-radius: 15px;
 }
 
+@media screen and (max-width: 500px){
+
+  .balanceBox{
+    width: 100%;
+  }
+}
+
 .balanceBox .mainbalance {
   visibility: hidden;
   font-size: 25px;
@@ -61,6 +68,14 @@
   margin-left: 8px;
   padding: 8px;
 }
+
+@media screen and (max-width: 345px){
+
+  .btn{
+    width: 29px;
+  }
+}
+
 .transferBox {
   width: 80px;
   background-color: #e5d1ff;
