@@ -66,7 +66,7 @@ function Balance() {
         <div className="convert">
           <p style={{ textAlign: "center" }}>CONVERT</p>
           <button
-            className="btn"
+            className="btn1"
             onClick={() => {
               setSign("$");
               setBalance(mainBalance);
@@ -75,7 +75,7 @@ function Balance() {
             ($)
           </button>
           <button
-            className="btn"
+            className="btn1"
             onClick={() => {
               setSign("\u20A6");
               setBalance(mainBalance * data.NGN)
@@ -84,7 +84,7 @@ function Balance() {
             (&#8358;)
           </button>
           <button
-            className="btn"
+            className="btn1"
             onClick={() => {
               setSign("\u20AC");
               setBalance(mainBalance * data.EUR);
@@ -123,7 +123,7 @@ function Balance() {
          <List 
           key={i}
           newName={e.name}
-          amount={e.amount}
+          amount={e.amountImport}
           />
         ))}
       </div>

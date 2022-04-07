@@ -20,9 +20,9 @@ function Confirmation() {
   const dispatch = useDispatch();
   
   const addList = () => {
-    const structure = {amount,name}
+    const structure = {amountImport,name}
     dispatch(savelist(structure));
-    dispatch(saveAmountBalance(amount));
+    dispatch(saveAmountBalance(amountImport));
   };
 
   useEffect(() => {
@@ -72,7 +72,7 @@ function Confirmation() {
             {sign}
             {roundOff(amount)}
           </h1>
-          <span class="mainbalance">{amount}</span>
+          <span class="mainbalance">{sign}{amount}</span>
         </div>
 
         <div className="currencySelection">
@@ -110,7 +110,8 @@ function Confirmation() {
       </div>
       <div className="sendCont">
         <div  onClick={addList} className="sendBtn">
-        <Link to="/">Confirm</Link>
+        <Link 
+        className="link" to="/">Confirm</Link>
         </div>
       </div>
     </div>

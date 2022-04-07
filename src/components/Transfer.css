@@ -1,6 +1,9 @@
 #transfer,
 #confirmation{
-  margin: 50px;
+  margin: 30px;
+  padding:20px;
+  background-color: #FCF6FE;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .transferHeader {
   line-height: 10px;
@@ -22,13 +25,14 @@
 .transferText1Box {
   display: flex;
   padding: 0;
+  color: #572BDA;
 }
 .back-icon {
   padding: 0;
   margin-right: 10px;
 }
 .arrow-1 {
-  margin-left: -9px;
+  margin-top: 8px;
 }
 .transferText1 {
   font-weight: 500;
@@ -40,14 +44,14 @@
   font-weight: 400;
 }
 .currencySelection {
-  margin-right: 150px;
+  margin-right: 132px;
 }
 
  .mainbalance {
   visibility: hidden;
   font-size: 25px;
   font-weight: 500;
-  background-color: white;
+  background-color: #FCF6FE;
   color: black;
   text-align: center;
   border-radius: 6px;
@@ -63,10 +67,14 @@
     visibility: visible;
   }
   
+  .price{
+    color: #572BDA;
+  }
+
 .btn {
   border-radius: 5px;
-  background-color: #f093ff;
-  color: rgb(243, 242, 242);
+  background-color: #F093FF;
+  color: #FCF6FE;
   cursor: pointer;
   margin-left: 8px;
   padding: 8px;
@@ -75,14 +83,16 @@
   height: 35px;
   width: 300px;
   font-size:17px;
+  color: #572BDA;
 }
 .input2{
-    height:17px;
+    height:28px;
     width:205px;
     font-size:17px;
+    color: #572BDA;
 }
 option:checked{
-    background-color: #9a4cfd;
+    background-color: #572BDA;
 }
 
 
@@ -93,13 +103,20 @@ option:checked{
   width: 80%;
 }
 .sendBtn {
-  background-color: #9a4cfd;
+  background-color: #572BDA;
+  color: #FCF6FE;
   text-align: center;
   width: 40%;
   padding-top: 10px;
   padding-bottom: 10px;
-  
+
 }
 .sendBtn a {
   text-decoration:none;
+}
+.link{
+  color: #FCF6FE;
+}
+#amount{
+  color: #572BDA;
 }

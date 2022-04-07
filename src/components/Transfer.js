@@ -40,6 +40,7 @@ const handleSubmit = (e) => {
   dispatch(saveUser(name))
 }
 
+
   const roundOff = (value) =>
     value >= 1000000000
       ? (Math.floor(value / 1000000000) * 1000000000) / 1000000000 + "B"
@@ -158,7 +159,7 @@ const handleSubmit = (e) => {
       </div>
       <div className="sendCont">
         <div onClick={()=>{handleSubmit();}}  className="sendBtn">
-          <Link to="/Confirmation">Send</Link>
+        <Link className="link" to="/Confirmation">Send</Link>
         </div>
       </div>
     </div>
