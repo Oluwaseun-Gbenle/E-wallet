@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { valueAmount } from "../slices/amountSlice";
 import { valueUser } from "../slices/userSlice";
 import { savelist } from "../slices/listSlice";
+import { saveAmountBalance } from "../slices/amountBalance";
 
 
 
@@ -21,6 +22,7 @@ function Confirmation() {
   const addList = () => {
     const structure = {amount,name}
     dispatch(savelist(structure));
+    dispatch(saveAmountBalance(amount));
   };
 
   useEffect(() => {

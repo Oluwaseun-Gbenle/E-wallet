@@ -4,7 +4,7 @@ import axios from "axios";
 import "./Balance.css";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { valueAmount } from "../slices/amountSlice";
+import { valueAmountBalance } from "../slices/amountBalance";
 import { valueBalance } from "../slices/balanceSlice";
 import { saveBalance } from "../slices/balanceSlice";
 import { selectList } from "../slices/listSlice";
@@ -15,7 +15,7 @@ function Balance() {
   const initialBalance = useSelector(valueBalance);
   const [sign, setSign] = useState("$");
   const [data, setData] = useState(null);
-  const amountImport = useSelector(valueAmount);
+  const amountImport = useSelector(valueAmountBalance);
   const mainBalance = initialBalance - amountImport;
   const [balance, setBalance] = useState(mainBalance);
   const dispatch = useDispatch();
