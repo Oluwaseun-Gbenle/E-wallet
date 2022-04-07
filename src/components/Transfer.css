@@ -26,6 +26,7 @@
   display: flex;
   padding: 0;
   color: #572BDA;
+  line-height: 15px;
 }
 .back-icon {
   padding: 0;
@@ -42,6 +43,7 @@
 }
 .transferText2 {
   font-weight: 400;
+  line-height: 15px;
 }
 .currencySelection {
   margin-right: 132px;
