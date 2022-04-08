@@ -157,11 +157,16 @@ const handleSubmit = (e) => {
           </p>
         </div>
       </div>
-      <div className="sendCont">
+      {name === "" && amount <= 0 ? <div className="sendCont">
+        <div onClick={(e)=>alert("Invalid Input")} className="sendBtn">
+        <Link className="link" to="/Transfer">Send</Link>
+        </div>
+      </div>
+      :<div className="sendCont">
         <div onClick={()=>{handleSubmit();}}  className="sendBtn">
         <Link className="link" to="/Confirmation">Send</Link>
         </div>
-      </div>
+      </div> }
     </div>
   );
 }
