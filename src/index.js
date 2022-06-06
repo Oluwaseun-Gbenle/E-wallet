@@ -6,6 +6,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import Login from "./components/Login";
 import Balance from "./components/Balance";
 import Transfer from "./components/Transfer";
 import Confirmation from "./components/Confirmation";
@@ -16,7 +17,8 @@ render(
 <BrowserRouter>
 <Provider store={store}>
   <Routes>
-    <Route path="/" element={<Balance />} />
+  <Route path="/" element={<Login />} />
+    <Route path="Balance" element={<Balance />} />
     <Route path="Transfer" element={<Transfer />} />
     <Route path="Confirmation" element={<Confirmation />} />
   </Routes>

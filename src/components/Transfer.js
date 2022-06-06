@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Transfer.css";
-import { users } from "./details";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { saveAmount } from "../slices/amountSlice";
 import { saveUser } from "../slices/userSlice";
 import { valueBalance } from "../slices/balanceSlice";
+import { fetchData, fetchUsers } from "./async-function";
+
 
 function Transfer() {
   const initialBalance = useSelector(valueBalance);
-  const dispatch = useDispatch(); // <-- dispatch function
+  const dispatch = useDispatch(); 
   const [data, setData] = useState(null);
+  const [users, setUsers] = useState([]);
   const [select, setSelect] = useState("USD");
   const [name, setName] = useState("");
   const [amount, setAmount] = useState(0);
@@ -20,26 +22,20 @@ function Transfer() {
 
 
   useEffect(() => {
-    async function fetchData() {
-      await axios("https://api.exchangerate-api.com/v4/latest/USD")
-        .then((response) => {
-          setData(response.data.rates);
-        })
-        .catch((err) => console.log("Request Failed", err));
-    }
-    fetchData();
+    fetchData({axios,setData});
+    fetchUsers({axios, setUsers});
   }, []);
   console.log(data);
+  console.log("users",users);
 
   const handleInput = (event) => {
     setAmount(event.target.value);
   };
 
-const handleSubmit = (e) => {
-  dispatch(saveAmount(amount))
-  dispatch(saveUser(name))
-}
-
+  const handleSubmit = (e) => {
+    dispatch(saveAmount(amount));
+    dispatch(saveUser(name));
+  };
 
   const roundOff = (value) =>
     value >= 1000000000
@@ -49,7 +45,6 @@ const handleSubmit = (e) => {
       : value >= 1000
       ? (Math.floor(value / 1000) * 1000) / 1000 + "k"
       : value;
-
 
   return (
     <div id="transfer">
@@ -121,7 +116,9 @@ const handleSubmit = (e) => {
             className="input"
             onChange={(event) => setName(event.target.value)}
           >
-             <option value="" disabled selected>Select your option</option>
+            <option value="" disabled selected>
+              Select your option
+            </option>
             {users.map((d) => (
               <option value={`${d.fname} ${d.lname}`}>
                 {d.fname} {d.lname}
@@ -157,20 +154,30 @@ const handleSubmit = (e) => {
           </p>
         </div>
       </div>
-      {name === "" && amount <= 0 ? <div className="sendCont">
-        <div onClick={(e)=>alert("Invalid Input")} className="sendBtn">
-        <Link className="link" to="/Transfer">Send</Link>
+      {name === "" && amount <= 0 ? (
+        <div className="sendCont">
+          <div onClick={(e) => alert("Invalid Input")} className="sendBtn">
+            <Link className="link" to="/Transfer">
+              Send
+            </Link>
+          </div>
         </div>
-      </div>
-      :<div className="sendCont">
-        <div onClick={()=>{handleSubmit();}}  className="sendBtn">
-        <Link className="link" to="/Confirmation">Send</Link>
+      ) : (
+        <div className="sendCont">
+          <div
+            onClick={() => {
+              handleSubmit();
+            }}
+            className="sendBtn"
+          >
+            <Link className="link" to="/Confirmation">
+              Send
+            </Link>
+          </div>
         </div>
-      </div> }
+      )}
     </div>
   );
 }
 
 export default Transfer;
-
-

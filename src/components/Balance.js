@@ -8,39 +8,25 @@ import { valueAmountBalance } from "../slices/amountBalance";
 import { valueBalance } from "../slices/balanceSlice";
 import { saveBalance } from "../slices/balanceSlice";
 import { selectList } from "../slices/listSlice";
+import { fetchData, roundOff } from "./async-function";
+import { valueAppUser } from "../slices/appUserSlice";
 
 
 function Balance() {
   const list = useSelector(selectList);
   const initialBalance = useSelector(valueBalance);
-  const [sign, setSign] = useState("$");
-  const [data, setData] = useState(null);
   const amountImport = useSelector(valueAmountBalance);
   const mainBalance = initialBalance - amountImport;
+  const [sign, setSign] = useState("$");
+  const [data, setData] = useState(null);
   const [balance, setBalance] = useState(mainBalance);
+  const applicationUser = useSelector(valueAppUser);
   const dispatch = useDispatch();
-
-   
-  const roundOff = (value) =>
-    value >= 1000000000
-      ? (Math.floor(value / 1000000000) * 1000000000) / 1000000000 + "B"
-      : value >= 1000000
-      ? (Math.floor(value / 1000000) * 1000000) / 1000000 + "M"
-      : value >= 1000
-      ? (Math.floor(value / 1000) * 1000) / 1000 + "k"
-      : value;
+  roundOff();
 
   useEffect(() => {
-    async function fetchData() {
-      await axios("https://api.exchangerate-api.com/v4/latest/USD")
-        .then((response) => {
-          setData(response.data.rates);
-        })
-        .catch((err) => console.log("Request Failed", err));
-    }
-    fetchData();
+   fetchData({axios, setData});
   }, []);
-  console.log(data);
 
   const handleSubmit = (e) => {
     dispatch(saveBalance(mainBalance));
@@ -50,7 +36,7 @@ function Balance() {
   return (
     <div id="balance">
       <div className="intro">
-        <h2 className="introText">Hi there King/Queen,</h2>
+        <h2 className="introText">{applicationUser}</h2>
         <p className="introText2">Welcome to your wallet Dashboard</p>
       </div>
 
