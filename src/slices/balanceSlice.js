@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const balanceSlice = createSlice({
   name: "balance",
-  initialState: 391675,
+  initialState: 0,
   reducers: {
     saveBalance: (state, action) => action.payload
   }

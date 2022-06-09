@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Transfer.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { saveAmount } from "../slices/amountSlice";
 import { saveUser } from "../slices/userSlice";
 import { valueBalance } from "../slices/balanceSlice";
-import { fetchData, fetchUsers } from "./async-function";
+import { fetchData, fetchUsers, roundOff } from "./async-function";
+import { valueAppUser } from "../slices/appUserSlice";
 
 
 function Transfer() {
   const initialBalance = useSelector(valueBalance);
+  const appUser = useSelector(valueAppUser);
   const dispatch = useDispatch(); 
   const [data, setData] = useState(null);
   const [users, setUsers] = useState([]);
@@ -19,14 +21,14 @@ function Transfer() {
   const [amount, setAmount] = useState(0);
   const [balance, setBalance] = useState(initialBalance);
   const [sign, setSign] = useState("$");
-
+  const navigate = useNavigate();
+roundOff();
 
   useEffect(() => {
     fetchData({axios,setData});
     fetchUsers({axios, setUsers});
+    initialBalance === 0 && navigate("/");
   }, []);
-  console.log(data);
-  console.log("users",users);
 
   const handleInput = (event) => {
     setAmount(event.target.value);
@@ -37,14 +39,6 @@ function Transfer() {
     dispatch(saveUser(name));
   };
 
-  const roundOff = (value) =>
-    value >= 1000000000
-      ? (Math.floor(value / 1000000000) * 1000000000) / 1000000000 + "B"
-      : value >= 1000000
-      ? (Math.floor(value / 1000000) * 1000000) / 1000000 + "M"
-      : value >= 1000
-      ? (Math.floor(value / 1000) * 1000) / 1000 + "k"
-      : value;
 
   return (
     <div id="transfer">
@@ -119,7 +113,7 @@ function Transfer() {
             <option value="" disabled selected>
               Select your option
             </option>
-            {users.map((d) => (
+            {users.filter(i=>`${i.fname} ${i.lname}`!= appUser).map((d) => (
               <option value={`${d.fname} ${d.lname}`}>
                 {d.fname} {d.lname}
               </option>
@@ -157,9 +151,9 @@ function Transfer() {
       {name === "" && amount <= 0 ? (
         <div className="sendCont">
           <div onClick={(e) => alert("Invalid Input")} className="sendBtn">
-            <Link className="link" to="/Transfer">
+            <div className="link" onClick={()=>navigate(-1)}>
               Send
-            </Link>
+            </div>
           </div>
         </div>
       ) : (
@@ -170,9 +164,9 @@ function Transfer() {
             }}
             className="sendBtn"
           >
-            <Link className="link" to="/Confirmation">
+            <div className="link" onClick={()=>{navigate("/Confirmation")}} >
               Send
-            </Link>
+            </div>
           </div>
         </div>
       )}

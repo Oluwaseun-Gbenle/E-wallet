@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import List from "./List";
 import axios from "axios";
 import "./Balance.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { valueAmountBalance } from "../slices/amountBalance";
 import { valueBalance } from "../slices/balanceSlice";
@@ -22,15 +22,13 @@ function Balance() {
   const [balance, setBalance] = useState(mainBalance);
   const applicationUser = useSelector(valueAppUser);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   roundOff();
 
   useEffect(() => {
    fetchData({axios, setData});
+   initialBalance === 0 && navigate("/");
   }, []);
-
-  const handleSubmit = (e) => {
-    dispatch(saveBalance(mainBalance));
-  };
 
   
   return (
@@ -79,7 +77,7 @@ function Balance() {
             (&euro;)
           </button>
         </div>
-        <span class="mainbalance">
+        <span className="mainbalance">
           {sign}
           {balance}
         </span>
@@ -89,7 +87,7 @@ function Balance() {
         <p className="introText2">What would you like to do today?</p>
 
         <Link
-          onClick={()=> {handleSubmit()}}
+          onClick={()=> { dispatch(saveBalance(mainBalance));}}
           style={{ textDecoration: "none" }}
           to="/Transfer"
         >

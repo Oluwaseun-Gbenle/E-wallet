@@ -13,6 +13,13 @@ export async function fetchData({axios, setData}) {
       })
       .catch((err) => console.log("Request Failed", err));
   }
+  export async function updateAmount({axios,payload}) {
+    await axios("https://e-wallet.oluwaseun2020.repl.co/api/update", payload)
+      .then((response) => {
+        console.log('res', response);
+      })
+      .catch((err) => console.log("Request Failed", err));
+  }
 
   export const roundOff = (value) =>
     value >= 1000000000

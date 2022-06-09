@@ -4,7 +4,7 @@ export const amountBalanceSlice = createSlice({
   name: "amountBalance",
   initialState: 0,
   reducers: {
-    saveAmountBalancez: (state, action) => action.payload
+    saveAmountBalance: (state, action) => action.payload
   }
 });
 export const { saveAmountBalance } = amountBalanceSlice.actions
