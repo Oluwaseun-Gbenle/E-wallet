@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import List from "./List";
 import axios from "axios";
 import "./Balance.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,30 +6,32 @@ import { useSelector, useDispatch } from "react-redux";
 import { valueAmountBalance } from "../slices/amountBalance";
 import { valueBalance } from "../slices/balanceSlice";
 import { saveBalance } from "../slices/balanceSlice";
-import { selectList } from "../slices/listSlice";
-import { fetchData, roundOff } from "./async-function";
+import { fetchData, fetchUsers, roundOff } from "./async-function";
 import { valueAppUser } from "../slices/appUserSlice";
 
 
 function Balance() {
-  const list = useSelector(selectList);
   const initialBalance = useSelector(valueBalance);
   const amountImport = useSelector(valueAmountBalance);
   const mainBalance = initialBalance - amountImport;
   const [sign, setSign] = useState("$");
   const [data, setData] = useState(null);
+  const [users, setUsers] = useState([]);
   const [balance, setBalance] = useState(mainBalance);
   const applicationUser = useSelector(valueAppUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   roundOff();
+  const transactionList = users.find((i) => `${i.fname} ${i.lname}` == applicationUser);
+  
 
   useEffect(() => {
    fetchData({axios, setData});
+   fetchUsers({axios, setUsers})
    initialBalance === 0 && navigate("/");
-  }, []);
-
+  }, [initialBalance]);
   
+console.log("creditList", transactionList)
   return (
     <div id="balance">
       <div className="intro">
@@ -99,17 +100,21 @@ function Balance() {
         Transaction history
       </div>
       <div className="history">
+      {transactionList?.amountReceived.map((received,id)=>(
         <div className="historyCase">
-          <p className="name">Credit from Ayo Abolaji</p>
-          <p className="amount">$9000</p>
+          <p className="name">Credit from {received.sender}</p>
+          <p className="amount">${received.amount}</p>
         </div>
-        {list.map((e, i) => (
-         <List 
-          key={i}
-          newName={e.name}
-          amount={e.amountImport}
-          />
         ))}
+
+        {transactionList?.amountSent.map((sent,id)=>(
+        <div className="historyCase">
+            <p className="name">Transfer to {sent.receiver}</p>
+            <p className="amount" style={{ color: "rgb(207, 5, 5)" }}>
+              -${sent.amount}
+            </p>
+          </div>
+          ))}
       </div>
     </div>
   );

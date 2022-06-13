@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Login.css";
 import "font-awesome/css/font-awesome.min.css";
-import LoadingStyle from "./spinner";
+import LoadingStyle from "./loadingStyle";
 import { fetchUsers } from "./async-function";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { saveAppUser } from "../slices/appUserSlice";
-import { saveUser } from "../slices/userSlice";
 import { saveBalance } from "../slices/balanceSlice";
 
 function Login() {
@@ -26,12 +25,12 @@ function Login() {
      {users.length === 0 ? <LoadingStyle /> : 
       <div className="container">
         <div className="login-container">
-          <h3>LOGIN</h3>
+          <h2>LOGIN</h2>
           <div className="form">
             <div>
-              <i className="fa fa-user" style={{ fontSize: 15 }}>
+              <i className="fa fa-user" style={{ fontSize: 15 }}></i>
                 <select
-                  className="input-box"
+                  className="input-box selection"
                   onChange={(e) => {
                     setExports({
                       name: e.target.selectedOptions[0].dataset.user,
@@ -55,7 +54,6 @@ function Login() {
                     </option>
                   ))}
                 </select>
-              </i>
             </div>
             <div>
               <i className="fa fa-lock" style={{ fontSize: 15 }}></i>

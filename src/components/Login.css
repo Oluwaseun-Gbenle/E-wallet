@@ -22,43 +22,50 @@
   justify-content: center;
   align-items: center;
   height: inherit;
+  width: 50vw;
 }
-.login-container > h3 {
-    margin-bottom:10px ;
+.login-container > h2 {
+  margin-bottom: 10px;
 }
-.form > div {
+.form  {
   margin: 12px 0 12px 0;
-  width:100%;
+  width: 100%;
 }
 .input-box {
-  margin-left: 8px;
-    border:none;
-    background-color: transparent;
-    border-bottom: 1px solid white;
-    color: white;
-    font-weight: 600;
-  }
-  
-  .input-box > option {
-    background-color: black;
-    color: grey;
-  }
-  .fa-lock{
-    position: relative;
-    top:20px;
-  }
-  .password {
-   margin-left: 15px;
-   width:90%;
-  }
+  margin-left: 20px;
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid white;
+  color: white;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.input-box > option {
+  background-color: black;
+  color: grey;
+}
+
+.fa-lock,.fa-user {
+  position: relative;
+  top: 20px;
+}
 
 .form > div > button {
-  width:inherit;
+  width: 100%;
+  margin: 25px 0 0 20px;
   padding: 6px 0 6px 0;
   border-color: transparent;
   border-radius: 2px;
   font-weight: 600;
-  font-size:15px;
+  font-size: 15px;
   cursor: pointer;
   background-color: #4418c9;
+}
+
+@media screen and (max-width: 600px) {
+  .input-box {
+    font-size: 12px;
+  }
 }

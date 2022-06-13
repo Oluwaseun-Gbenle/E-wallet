@@ -2,19 +2,26 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Transfer.css";
 import "./Balance.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { valueAmount } from "../slices/amountSlice";
-import { userSlice, valueUser } from "../slices/userSlice";
-import { savelist } from "../slices/listSlice";
+import { valueUser } from "../slices/userSlice";
 import { saveAmountBalance } from "../slices/amountBalance";
-import { fetchData, fetchUsers, roundOff, updateAmount } from "./async-function";
+import {
+  fetchData,
+  fetchUsers,
+  roundOff,
+  updateAmount,
+} from "./async-function";
 import { valueAppUser } from "../slices/appUserSlice";
+import Modal from "./Modal";
 
 function Confirmation() {
-  const appUser = useSelector(valueAppUser)
+  const appUser = useSelector(valueAppUser);
   const [users, setUsers] = useState([]);
   const [data, setData] = useState(null);
+  const [response, setResponse] = useState(null);
+  const [modal, setModal] = useState(false)
   const amountImport = useSelector(valueAmount);
   const name = useSelector(valueUser);
   const [amount, setAmount] = useState(amountImport);
@@ -24,31 +31,34 @@ function Confirmation() {
   roundOff();
 
   const addList = () => {
-    const structure = { amountImport, name };
-    dispatch(savelist(structure));
     dispatch(saveAmountBalance(amountImport));
   };
 
   useEffect(() => {
     fetchData({ axios, setData });
     fetchUsers({ axios, setUsers });
-    amountImport === 0 && navigate("/");
+    //amountImport === 0 && navigate("/");
   }, []);
-  let receiver = users
+  let receiverId = users
     .map((i) => `${i.fname} ${i.lname}` == name && i._id)
     .find((i) => i);
-let sender = users
-.map((i) => `${i.fname} ${i.lname}` == appUser && i._id)
-.find((i) => i);
+  let receiver = name;
+  let senderId = users
+    .map((i) => `${i.fname} ${i.lname}` == appUser && i._id)
+    .find((i) => i);
+  let sender = appUser;
   const payload = {
-      senderId: sender,
-    receiverId: receiver,
-    amount: amountImport,
+    senderId,
+    receiverId,
+    sender,
+    receiver,
+    walletbalance: amountImport,
   };
-  updateAmount({axios,payload})
+console.log("response", response)
   return (
     <div id="confirmation">
       <div className="transferHeader">
+       {modal && response != null ? <Modal res={response} /> : null} 
         <div className="transferText1Box">
           <div className="back-icon">
             <div onClick={() => navigate(-1)}>
@@ -115,7 +125,8 @@ let sender = users
           <div
             className="link"
             onClick={() => {
-              navigate("/Balance");
+              //updateAmount({setResponse, axios, payload });
+               setModal(true)
             }}
           >
             Confirm

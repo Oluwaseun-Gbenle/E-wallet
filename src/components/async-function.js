@@ -7,16 +7,18 @@ export async function fetchData({axios, setData}) {
   };
 
  export async function fetchUsers({axios, setUsers}) {
-    await axios("https://e-wallet.oluwaseun2020.repl.co/api/users")
+    await axios.get("https://e-wallet.oluwaseun2020.repl.co/api/users")
       .then((response) => {
         setUsers(response.data);
       })
       .catch((err) => console.log("Request Failed", err));
   }
-  export async function updateAmount({axios,payload}) {
-    await axios("https://e-wallet.oluwaseun2020.repl.co/api/update", payload)
+  export async function updateAmount({setResponse,axios,payload}) {
+    console.log("payload",payload)
+    await axios.post("https://e-wallet.oluwaseun2020.repl.co/api/users/update", payload)
       .then((response) => {
         console.log('res', response);
+        setResponse(response.status)
       })
       .catch((err) => console.log("Request Failed", err));
   }
