@@ -24,11 +24,14 @@ function Login() {
     <>
      {users.length === 0 ? <LoadingStyle /> : 
       <div className="container">
+        <div className="container2">
         <div className="login-container">
           <h2>LOGIN</h2>
           <div className="form">
-            <div>
+            <div className="inputStyle">
+              <div>
               <i className="fa fa-user" style={{ fontSize: 15 }}></i>
+              </div>
                 <select
                   className="input-box selection"
                   onChange={(e) => {
@@ -55,8 +58,10 @@ function Login() {
                   ))}
                 </select>
             </div>
-            <div>
+            <div className="inputStyle">
+              <div>
               <i className="fa fa-lock" style={{ fontSize: 15 }}></i>
+              </div>
               <div>
                 <input
                   className="input-box password"
@@ -78,6 +83,7 @@ function Login() {
               </button>
             </div>
           </div>
+        </div>
         </div>
       </div>
       }

@@ -8,6 +8,7 @@ import { valueAmountBalance } from "../slices/amountBalance";
 import { valueBalance } from "../slices/balanceSlice";
 import { fetchData, fetchUsers, roundOff } from "./async-function";
 import { valueAppUser } from "../slices/appUserSlice";
+import LoadingStyle from "./loadingStyle";
 
 function Balance() {
   const initialBalance = useSelector(valueBalance);
@@ -28,99 +29,118 @@ function Balance() {
     fetchData({ axios, setData });
     fetchUsers({ axios, setUsers });
     //initialBalance === 0 && navigate("/");
-  }, [initialBalance]);
+  }, [users]);
 
   console.log("creditList", transactionList);
   return (
-    <div id="balance">
-      <div className="intro">
-        <h2 className="introText">Hi, {applicationUser}</h2>
-        <p className="introText2">Welcome to your wallet Dashboard</p>
-      </div>
-
-      <div className="balanceBox">
-        <div className="accBalance">
-          <p>BALANCE</p>
-          <p className="fig">
-            {sign}
-            {roundOff(balance)}
-          </p>
-        </div>
-
-        <div className="convert">
-          <p>CONVERT</p>
-          <button
-            className="btn1"
-            onClick={() => {
-              setSign("$");
-              setBalance(mainBalance);
-            }}
-          >
-            ($)
-          </button>
-          <button
-            className="btn1"
-            onClick={() => {
-              setSign("\u20A6");
-              setBalance(mainBalance * data.NGN);
-            }}
-          >
-            (&#8358;)
-          </button>
-          <button
-            className="btn1"
-            onClick={() => {
-              setSign("\u20AC");
-              setBalance(mainBalance * data.EUR);
-            }}
-          >
-            (&euro;)
-          </button>
-        </div>
-        <span className="mainbalance">
-          {sign}
-          {balance}
-        </span>
-      </div>
-
-      <div className="transferInitiation">
-        <p className="introText2">What would you like to do today?</p>
-
-        <div
-          onClick={() => {
-            navigate("/Transfer");
-          }}
-        >
-          <div className="transferBox">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="40px" height="40px"style={{ fill: "#ff7e3c" }}>
-              <path d="M320 96H192L144.6 24.88C137.5 14.24 145.1 0 157.9 0H354.1C366.9 0 374.5 14.24 367.4 24.88L320 96zM192 128H320C323.8 130.5 328.1 133.3 332.1 136.4C389.7 172.7 512 250.9 512 416C512 469 469 512 416 512H96C42.98 512 0 469 0 416C0 250.9 122.3 172.7 179 136.4C183.9 133.3 188.2 130.5 192 128V128zM276.1 224C276.1 212.9 267.1 203.9 255.1 203.9C244.9 203.9 235.9 212.9 235.9 224V230C230.3 231.2 224.1 232.9 220 235.1C205.1 241.9 192.1 254.5 188.9 272.8C187.1 283 188.1 292.9 192.3 301.8C196.5 310.6 203 316.8 209.6 321.3C221.2 329.2 236.5 333.8 248.2 337.3L250.4 337.9C264.4 342.2 273.8 345.3 279.7 349.6C282.2 351.4 283.1 352.8 283.4 353.7C283.8 354.5 284.4 356.3 283.7 360.3C283.1 363.8 281.2 366.8 275.7 369.1C269.6 371.7 259.7 373 246.9 371C240.9 370 230.2 366.4 220.7 363.2C218.5 362.4 216.3 361.7 214.3 361C203.8 357.5 192.5 363.2 189 373.7C185.5 384.2 191.2 395.5 201.7 398.1C202.9 399.4 204.4 399.9 206.1 400.5C213.1 403.2 226.4 407.4 235.9 409.6V416C235.9 427.1 244.9 436.1 255.1 436.1C267.1 436.1 276.1 427.1 276.1 416V410.5C281.4 409.5 286.6 407.1 291.4 405.9C307.2 399.2 319.8 386.2 323.1 367.2C324.9 356.8 324.1 346.8 320.1 337.7C316.2 328.7 309.9 322.1 303.2 317.3C291.1 308.4 274.9 303.6 262.8 299.9L261.1 299.7C247.8 295.4 238.2 292.4 232.1 288.2C229.5 286.4 228.7 285.2 228.5 284.7C228.3 284.3 227.7 283.1 228.3 279.7C228.7 277.7 230.2 274.4 236.5 271.6C242.1 268.7 252.9 267.1 265.1 268.1C269.5 269.7 283 272.3 286.9 273.3C297.5 276.2 308.5 269.8 311.3 259.1C314.2 248.5 307.8 237.5 297.1 234.7C292.7 233.5 282.7 231.5 276.1 230.3L276.1 224z" />
-            </svg>
+    <>
+      {users.length === 0 ? (
+        <LoadingStyle />
+      ) : (
+        <div id="balance">
+          <div className="intro">
+            <h2 className="introText">Hi, {applicationUser}</h2>
+            <p className="introText2">Welcome to your wallet Dashboard</p>
           </div>
-          <p className="transferLabel">Transfer</p>
+
+          <div className="balanceBox">
+            <div className="accBalance">
+              <p>BALANCE</p>
+              <p className="fig">
+                {sign}
+                {roundOff(balance)}
+              </p>
+            </div>
+
+            <div className="convert">
+              <p>CONVERT</p>
+              <button
+                className="btn1"
+                onClick={() => {
+                  setSign("$");
+                  setBalance(mainBalance);
+                }}
+              >
+                ($)
+              </button>
+              <button
+                className="btn1"
+                onClick={() => {
+                  setSign("\u20A6");
+                  setBalance(mainBalance * data.NGN);
+                }}
+              >
+                (&#8358;)
+              </button>
+              <button
+                className="btn1"
+                onClick={() => {
+                  setSign("\u20AC");
+                  setBalance(mainBalance * data.EUR);
+                }}
+              >
+                (&euro;)
+              </button>
+            </div>
+            <span className="mainbalance">
+              {sign}
+              {balance}
+            </span>
+          </div>
+
+          <div className="transferInitiation">
+            <p className="introText2">What would you like to do today?</p>
+
+            <div
+              onClick={() => {
+                navigate("/Transfer");
+              }}
+            >
+              <div className="transferBox">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  version="1.0"
+                  width="40px"
+                  height="40px"
+                  viewBox="0 0 512.000000 512.000000"
+                  preserveAspectRatio="xMidYMid meet"
+                >
+                  <g
+                    transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+                    fill="#ff7e3c"
+                    stroke="none"
+                  >
+                    <path d="M812 4601 c-441 -278 -802 -509 -802 -512 0 -7 1150 -733 1153 -728 1 2 28 42 59 89 197 296 488 518 827 630 147 49 238 67 390 79 546 40 1077 -198 1409 -634 l23 -30 -4 175 c-4 153 -7 186 -30 261 -36 120 -68 188 -134 287 -165 248 -422 405 -723 442 -50 6 -343 10 -722 10 l-638 0 -2 218 -3 218 -803 -505z" />
+                    <path d="M2449 3859 c-303 -25 -578 -151 -799 -365 -262 -254 -400 -578 -400 -938 0 -974 1012 -1607 1887 -1181 583 284 869 956 671 1579 -65 205 -176 383 -337 539 -175 170 -358 272 -592 331 -85 22 -133 28 -289 40 -25 2 -88 0 -141 -5z m251 -624 c0 -47 2 -85 4 -85 2 0 41 -7 86 -16 82 -15 202 -55 226 -74 9 -8 -2 -42 -43 -143 -31 -72 -57 -134 -59 -136 -2 -2 -35 8 -72 23 -187 73 -373 71 -397 -4 -14 -45 29 -68 202 -105 199 -43 266 -70 338 -136 109 -100 121 -281 30 -415 -55 -79 -176 -154 -275 -170 l-40 -7 0 -93 0 -94 -120 0 -120 0 0 89 0 88 -68 6 c-91 9 -213 41 -289 76 l-62 29 61 139 c33 76 62 139 63 141 2 2 25 -8 52 -21 87 -45 182 -69 293 -74 131 -7 180 8 180 55 0 44 -28 57 -216 102 -190 46 -276 83 -334 146 -59 64 -73 104 -74 209 -1 109 19 159 91 236 55 59 155 112 245 131 l58 12 0 88 0 88 120 0 120 0 0 -85z" />
+                    <path d="M3891 1644 c-81 -123 -237 -285 -369 -384 -511 -384 -1208 -425 -1766 -104 -159 91 -349 255 -474 409 l-33 40 4 -170 c5 -195 21 -272 85 -409 56 -119 113 -199 211 -296 141 -140 308 -230 506 -271 83 -17 145 -19 768 -19 l677 0 0 -220 c0 -121 2 -220 4 -220 2 0 159 97 348 216 497 314 864 546 1013 639 72 45 158 100 193 122 l64 40 -54 33 c-29 18 -288 180 -574 361 -287 181 -525 329 -530 329 -5 0 -38 -43 -73 -96z" />
+                  </g>
+                </svg>
+              </div>
+              <p className="transferLabel">Transfer</p>
+            </div>
+          </div>
+
+          <div className="introText2">Transaction history</div>
+          <div className="history">
+            {transactionList?.amountReceived.map((received, id) => (
+              <div className="historyCase">
+                <p className="name">Credit from {received.sender}</p>
+                <p className="amount">${received.amount}</p>
+              </div>
+            ))}
+
+            {transactionList?.amountSent.map((sent, id) => (
+              <div className="historyCase">
+                <p className="name">Transfer to {sent.receiver}</p>
+                <p className="amount" style={{ color: "rgb(207, 5, 5)" }}>
+                  -${sent.amount}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-
-      <div className="introText2">
-        Transaction history
-      </div>
-      <div className="history">
-        {transactionList?.amountReceived.map((received, id) => (
-          <div className="historyCase">
-            <p className="name">Credit from {received.sender}</p>
-            <p className="amount">${received.amount}</p>
-          </div>
-        ))}
-
-        {transactionList?.amountSent.map((sent, id) => (
-          <div className="historyCase">
-            <p className="name">Transfer to {sent.receiver}</p>
-            <p className="amount" style={{ color: "rgb(207, 5, 5)" }}>
-              -${sent.amount}
-            </p>
-          </div>
-        ))}
-      </div>
-    </div>
+      )}
+    </>
   );
 }
 
