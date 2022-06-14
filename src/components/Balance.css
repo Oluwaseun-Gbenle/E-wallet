@@ -82,12 +82,20 @@
   padding: 8px;
 }
 
+.btn1:hover{
+  background-color: #fda97f;
+}
+
 .transferInitiation {
   margin-top: 20px;
 }
 
 .transferLabel {
   margin: 5px 0 10px 8px;
+}
+
+.svg:hover{
+  fill: #fda97f;
 }
 
 .transferBox {
