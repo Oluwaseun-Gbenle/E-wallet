@@ -7,7 +7,7 @@
   min-width: 20em;
   max-width: 70%;
   color: black;
-  background-color: #fff;
+  background-color: #fcf6fe;
   border-radius: 1em;
   transform: translate(-50%, -50%);
   outline: transparent;
@@ -40,12 +40,16 @@
 
 .close {
   font-size: 1.25em;
-  background-color: #000;
+  background-color: #ff7e3c;
   border: none;
   margin: 20px 0 0 34%;
   padding: 0.5em 1em;
   color: #fff;
-  box-shadow: 0 0 0 2px #000 inset;
+  box-shadow: 0 0 0 2px #ff7e3c inset;
   border-radius: 0.25em;
   cursor: pointer;
+}
+
+.close:hover{
+  background-color: #fda97f;
 }

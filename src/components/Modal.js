@@ -18,7 +18,7 @@ function Modal({ res }) {
                   <path d="M1 14 L5 10 L13 18 L27 4 L31 8 L13 26 z"></path>
                 </svg>
               </div>
-              <h2>Transaction successful</h2>
+              <h2 className="text">Transaction successful</h2>
             </div>
           ) : (
             <div>
@@ -43,7 +43,7 @@ function Modal({ res }) {
           <button
             className="close"
             onClick={() => {
-              navigate("/Balance");
+              res == 200 ?  navigate("/Balance") : navigate(-1)
             }}
           >
             Close

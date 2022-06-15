@@ -7,13 +7,12 @@ import { fetchUsers } from "./async-function";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { saveAppUser } from "../slices/appUserSlice";
-import { saveBalance } from "../slices/balanceSlice";
 
 function Login() {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [password, setPassword] = useState("");
-  const [exports, setExports] = useState({ name: "", balance: 0 });
+  const [exports, setExports] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,25 +34,23 @@ function Login() {
                 <select
                   className="input-box selection"
                   onChange={(e) => {
-                    setExports({
-                      name: e.target.selectedOptions[0].dataset.user,
-                      balance: e.target.selectedOptions[0].dataset.balance,
-                    });
+                    setExports(
+                      e.target.selectedOptions[0].dataset.user,
+                    );
                     setPassword(e.target.selectedOptions[0].dataset.tag);
                   }}
                 >
                   <option disabled selected className="firstOption" value="">
                     Enter User Name
                   </option>{" "}
-                  {users.map((d, idx) => (
+                  {users.map((user, idx) => (
                     <option
                       key={idx}
-                      value={d.username}
-                      data-tag={d.password}
-                      data-user={`${d.fname} ${d.lname}`}
-                      data-balance={d.walletbalance}
+                      value={user.username}
+                      data-tag={user.password}
+                      data-user={user._id}
                     >
-                      {d.username}
+                      {user.username}
                     </option>
                   ))}
                 </select>
@@ -62,21 +59,18 @@ function Login() {
               <div>
               <i className="fa fa-lock" style={{ fontSize: 15 }}></i>
               </div>
-              <div>
                 <input
                   className="input-box password"
                   value={password}
                   placeholder="Password"
                   readOnly
                 />
-              </div>
             </div>
             <div>
               <button
                 onClick={() => {
                   password && navigate("/Balance");
-                  dispatch(saveAppUser(exports.name));
-                  dispatch(saveBalance(exports.balance));
+                  dispatch(saveAppUser(exports));
                 }}
               >
                 Login

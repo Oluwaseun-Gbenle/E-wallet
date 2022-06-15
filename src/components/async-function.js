@@ -14,11 +14,17 @@ export async function fetchData({axios, setData}) {
       .catch((err) => console.log("Request Failed", err));
   }
   export async function updateAmount({setResponse,axios,payload}) {
-    console.log("payload",payload)
     await axios.post("https://e-wallet.oluwaseun2020.repl.co/api/users/update", payload)
       .then((response) => {
-        console.log('res', response);
         setResponse(response.status)
+      })
+      .catch((err) => console.log("Request Failed", err));
+  }
+
+  export async function fetchSingleUser({axios, setAppUser, appUserId}) {
+    await axios.get(`https://e-wallet.oluwaseun2020.repl.co/api/users/details/${appUserId}`)
+      .then((response) => {
+        setAppUser(response.data);
       })
       .catch((err) => console.log("Request Failed", err));
   }
