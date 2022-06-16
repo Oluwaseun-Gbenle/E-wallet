@@ -103,8 +103,18 @@
 
 .transferLabel {
   margin: 5px 0 10px 8px;
+  font-weight: 500;
 }
-
+.fa-trash {
+color: red;
+margin-top: 18px;
+font-size: 18px;
+}
+.historyLabel {
+display: flex;
+justify-content: space-between;
+width: 74%;
+}
 .svg:hover{
   fill: #fda97f;
 }
@@ -144,7 +154,7 @@
 }
 
 @media screen and (max-width: 500px) {
-  .balanceBox, .historyCase {
+  .balanceBox, .historyCase,.historyLabel {
     width: 100%;
   }
 }

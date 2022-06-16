@@ -5,13 +5,11 @@ import { persistReducer } from "redux-persist";
 import thunk from "redux-thunk";
 import amountReducer from "../slices/amountSlice";
 import userReducer from "../slices/userSlice";
-import amountBalanceReducer from "../slices/amountBalance";
 import appUserReducer from "../slices/appUserSlice";
 
 const reducers = combineReducers({
   amount: amountReducer,
   user: userReducer,
-  amountBalance: amountBalanceReducer,
   appUser: appUserReducer,
 });
 

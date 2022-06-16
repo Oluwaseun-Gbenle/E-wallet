@@ -50,6 +50,25 @@
   cursor: pointer;
 }
 
+.btnContainer{
+  display: flex;
+  justify-content: space-around;
+}
+.yesButton, .noButton {
+  font-size: 1.25em;
+  background-color: green;
+  border: none;
+  padding: 5px 10px;
+  color: #fff;
+  box-shadow: 0 0 0 2px green inset;
+  border-radius: 0.25em;
+  cursor: pointer;
+}
+.noButton {
+background-color: red;
+box-shadow: 0 0 0 2px red inset;
+}
+
 .close:hover{
   background-color: #fda97f;
 }

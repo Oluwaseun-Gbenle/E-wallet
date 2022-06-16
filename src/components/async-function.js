@@ -29,6 +29,18 @@ export async function fetchData({axios, setData}) {
       .catch((err) => console.log("Request Failed", err));
   }
 
+  export async function deleteTransaction({axios, userId}) {
+    console.log("userId",userId);
+   const payload = {
+      userId
+    }
+    await axios.post("https://e-wallet.oluwaseun2020.repl.co/api/users/delete-transactions", payload)
+      .then((response) => {
+        console.log(response.status);
+      })
+      .catch((err) => console.log("Request Failed", err));
+  }
+
   export const roundOff = (value) =>
     value >= 1000000000
       ? (Math.floor(value / 1000000000) * 1000000000) / 1000000000 + "B"

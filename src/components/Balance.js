@@ -7,11 +7,13 @@ import { useSelector } from "react-redux";
 import { fetchData, fetchSingleUser, roundOff } from "./async-function";
 import { valueAppUser } from "../slices/appUserSlice";
 import LoadingStyle from "./loadingStyle";
+import ModalDelete from "./ModalDelete";
 
 function Balance() {
   const [sign, setSign] = useState("$");
   const [data, setData] = useState(null);
   const [appUser, setAppUser] = useState({});
+  const [modal, setModal] = useState(false);
   const mainBalance = appUser.walletbalance;
   const [balance, setBalance] = useState(mainBalance);
   const appUserId = useSelector(valueAppUser);
@@ -130,7 +132,13 @@ function Balance() {
             </div>
           </div>
 
-          <div className="introText2">Transaction history</div>
+          {modal && <ModalDelete />}
+          <div className="historyLabel">
+            <div className="introText2">Transaction history</div>
+            <div onClick={()=>setModal(true)}>
+              <i className="fa fa-trash" aria-hidden="true"></i>
+            </div>
+          </div>
           <div className="history">
             {appUser?.amountReceived.map((received, id) => (
               <div className="historyCase">
