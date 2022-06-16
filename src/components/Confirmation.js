@@ -53,6 +53,8 @@ function Confirmation() {
   };
   console.log(amount);
   return (
+    <>
+    {modal && response == null ? <LoadingStyle /> : null}
     <div className="transferContainer">
       <div id="confirmation">
         <div className="transferHeader">
@@ -138,7 +140,6 @@ function Confirmation() {
               onClick={() => {
                 updateAmount({ setResponse, axios, payload });
                 setModal(true);
-                !response && <LoadingStyle />;
               }}
             >
               Confirm
@@ -147,6 +148,7 @@ function Confirmation() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
