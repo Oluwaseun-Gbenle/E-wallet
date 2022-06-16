@@ -1,4 +1,4 @@
-@import url("http://fonts.googleapis.com/css2?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900"); 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 .transferContainer {
 display: flex;
 justify-content: center;
@@ -33,7 +33,7 @@ overflow-x: hidden;
 }
 
 .transferText1 {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 30px;
 }
 
@@ -96,7 +96,7 @@ overflow-x: hidden;
   border-radius: 5px;
   border-color: #ff7e3c;
   background-color: #ff7e3c;
-  font-weight: 600;
+  font-weight: 700;
   color: #fcf6fe;
   cursor: pointer;
   margin-top: 10px;
