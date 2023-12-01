@@ -48,6 +48,7 @@ function Transfer() {
       {Object.keys(appUser).length === 0 ? (
         <LoadingStyle />
       ) : (
+        <div className="transferOuterContainer">
         <div className="transferContainer">
           <div id="transfer">
             <div className="transferHeader">
@@ -85,7 +86,7 @@ function Transfer() {
               {({ handleSubmit, setFieldValue, touched, errors, values }) => (
                 <div>
                   <div className="displayContainer">
-                    <div className="display1">
+                    {/* <div className="display1">
                       <div className="currencyArea">
                         <div className="balanceText">BALANCE</div>
                         <h1 className="price">
@@ -97,43 +98,10 @@ function Transfer() {
                           {balance}
                         </span>
                       </div>
-
-                      <div className="currencySelection">
-                        <div className="currencyText">CURRENCY</div>
-                        <div className="btns">
-                          <button
-                            className="btn"
-                            onClick={() => {
-                              setSign("$");
-                              setBalance(mainBalance);
-                            }}
-                          >
-                            ($)
-                          </button>
-                          <button
-                            className="btn"
-                            onClick={() => {
-                              setSign("\u20A6");
-                              setBalance(mainBalance * data.NGN);
-                            }}
-                          >
-                            (&#8358;)
-                          </button>
-                          <button
-                            className="btn"
-                            onClick={() => {
-                              setSign("\u20AC");
-                              setBalance(mainBalance * data.EUR);
-                            }}
-                          >
-                            (&euro;)
-                          </button>
-                        </div>
-                      </div>
-                    </div>
+                    </div> */}
 
                     <div className="display2">
-                      <div className="form2">
+                      <div className="form2 ">
                         <p className="inputText1">
                           Who would you like to send money to?
                         </p>
@@ -162,7 +130,7 @@ function Transfer() {
                             ))}
                         </select>
                       </div>
-                      <div className="form2">
+                      <div className="form2 cardPadding">
                         <p className="inputText2">
                           How much would you like to send?
                         </p>
@@ -172,7 +140,7 @@ function Transfer() {
                           </div>
                         ) : null}
                         <input
-                          className="input2"
+                          className="input2 input"
                           type="number"
                           name="inputAmount"
                           list="amount"
@@ -184,6 +152,7 @@ function Transfer() {
                         />
                         <select
                           id="amount"
+                          style={{borderRadius:"15px",border:"1px solid #572BDA"}}
                           onChange={(event) => setSelect(event.target.value)}
                         >
                           <option value="USD">USD</option>
@@ -214,6 +183,7 @@ function Transfer() {
               )}
             </Formik>
           </div>
+        </div>
         </div>
       )}
     </>

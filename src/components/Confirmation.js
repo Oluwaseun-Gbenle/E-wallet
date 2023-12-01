@@ -55,6 +55,7 @@ function Confirmation() {
   return (
     <>
     {modal && response == null ? <LoadingStyle /> : null}
+    <div className="transferOuterContainer">
     <div className="transferContainer">
       <div id="confirmation">
         <div className="transferHeader">
@@ -78,7 +79,7 @@ function Confirmation() {
             You are about to make an irreversible transaction
           </p>
         </div>
-        <div className="display1">
+        <div className="toSendContainer">
           <div className="currencyArea">
             <div className="balanceText">YOU'RE ABOUT TO SEND</div>
             <h1 className="price">
@@ -91,38 +92,7 @@ function Confirmation() {
             </span>
           </div>
 
-          <div className="currencySelection">
-            <div className="currencyText">CURRENCY</div>
-            <div className="btns">
-              <button
-                className="btn"
-                onClick={() => {
-                  setSign("$");
-                  setAmount(amountImport);
-                }}
-              >
-                ($)
-              </button>
-              <button
-                className="btn"
-                onClick={() => {
-                  setSign("\u20A6");
-                  setAmount(amountImport * data.NGN);
-                }}
-              >
-                (&#8358;)
-              </button>
-              <button
-                className="btn"
-                onClick={() => {
-                  setSign("\u20AC");
-                  setAmount(amountImport * data.EUR);
-                }}
-              >
-                (&euro;)
-              </button>
-            </div>
-          </div>
+          
         </div>
         <div className="transferInitiation">
           <p className="introText2">To</p>
@@ -147,6 +117,7 @@ function Confirmation() {
           </div>
         </div>
       </div>
+    </div>
     </div>
     </>
   );
